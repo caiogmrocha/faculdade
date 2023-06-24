@@ -3,7 +3,7 @@
 int main() {
     int ano;
 
-    printf("Digite o primeiro numero: \n");
+    printf("Digite o ano a ser considerado: \n");
     scanf("%d", &ano);
     
     if ((ano % 4 == 0) && (ano % 100 != 0)) {
