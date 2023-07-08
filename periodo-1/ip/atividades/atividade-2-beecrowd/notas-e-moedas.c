@@ -27,7 +27,6 @@ int main() {
         printf("%d moeda(s) de R$ %.2lf\n", quantidade, moedas[i]);
 
         valor = fmod(valor, moedas[i]);
-        // printf("%f\n", valor);
     }
 
     return 0;
