@@ -6,7 +6,7 @@ from textwrap import dedent
 from datasource import datasource
 
 class Presenter:
-    available_view_choices = [1,2,3,4,]
+    available_view_choices = [1,2,3,4,5,6]
 
     def bootstrap(self):
         self.home_view()
@@ -215,6 +215,27 @@ class Presenter:
         datasource.update(item_id, data)
 
         print("\nNovo produto atualizado com sucesso!")
+
+        self.choose_view_handler()
+
+
+    def delete_view(self):
+        system('clear')
+
+        print(dedent("""
+        ###############################
+        #                             #
+        #   Deletar produto           #
+        #                             #
+        ###############################
+
+        """))
+
+        item_id = int(input("Digite o ID do produto a ser deletado: "))
+
+        datasource.delete(item_id)
+
+        print("\nProduto deletado com sucesso!")
 
         self.choose_view_handler()
 

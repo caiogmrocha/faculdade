@@ -20,5 +20,9 @@
 - [] Presenter.search_view
 - [x] Presenter.details_view
 - [x] Presenter.create_view
-- [] Presenter.update_view
+- [x] Presenter.update_view
 - [] Presenter.delete_view
+- [] Validações
+    - [] Presenter.create_view
+    - [] Presenter.update_view
+    - [] Presenter.delete_view
