@@ -17,11 +17,11 @@
 
 - [x] Presenter.home_view
 - [x] Presenter.list_view
-- [] Presenter.search_view
+- [x] Presenter.search_view
 - [x] Presenter.details_view
 - [x] Presenter.create_view
 - [x] Presenter.update_view
-- [] Presenter.delete_view
+- [x] Presenter.delete_view
 - [] Validações
     - [] Presenter.create_view
     - [] Presenter.update_view

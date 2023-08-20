@@ -13,7 +13,7 @@ class Presenter:
 
 
     def choose_view_handler(self):
-        choice = int(input("(6 -> home) > "))
+        choice = int(input("(7 -> home) > "))
 
         if choice == 0:
             datasource.persists()
@@ -21,21 +21,18 @@ class Presenter:
 
         choices = {
             1: 'list_view',
-            2: 'details_view',
-            3: 'create_view',
-            4: 'update_view',
-            5: 'delete_view',
-            6: 'home_view',
+            2: 'search_view',
+            3: 'details_view',
+            4: 'create_view',
+            5: 'update_view',
+            6: 'delete_view',
+            7: 'home_view',
         }
 
         if choice not in choices.keys():
             print('Opção indisponível')
         else:
-            print("choices[choice]: ", choices[choice], choice)
-            try:
-                getattr(self, choices[choice])()
-            except:
-                print("view not implemented")
+            getattr(self, choices[choice])()
         
         self.choose_view_handler()
 
@@ -57,11 +54,12 @@ class Presenter:
         ###############################
 
         1 - Listar produtos cadastrados
-        2 - Detalhes de um produto cadastrado
-        3 - Cadastrar um novo produto
-        4 - Editar um produto existente
-        5 - Excluir um produto existente
-        6 - Ir para a home
+        2 - Filtrar produtos cadastrados
+        3 - Detalhes de um produto cadastrado
+        4 - Cadastrar um novo produto
+        5 - Editar um produto existente
+        6 - Excluir um produto existente
+        7 - Ir para a home
         """))
 
         self.choose_view_handler()
@@ -81,7 +79,7 @@ class Presenter:
         items = datasource.get_all()
 
         if len(items):
-            for item in datasource.get_all():
+            for item in items:
                 print(f"ID: {item['id']}, Nome: {item['name']}, Preço: R$ {str(item['price']).replace('.', ',')}")
         else:
             print("Estoque vazio\n")
@@ -122,13 +120,13 @@ class Presenter:
         self.choose_view_handler()
 
 
-    def details_view_old(self):
+    def search_view(self):
         system('clear')
 
         print(dedent("""
         ###############################
         #                             #
-        #   Detalhes de um Produto    #
+        #    Filtragem de produtos    #
         #                             #
         # Selecione o filtro desejado #
         #                             #
@@ -156,12 +154,19 @@ class Presenter:
             print('Opção indisponível')
         else:
             filter_value = input("Digite o valor do filtro: ")
+            
+            if chosen_filter == 1:
+                filter_value = int(filter_value)
+            elif chosen_filter == 4:
+                filter_value = float(filter_value)
 
             filtered_items = getattr(datasource, filter_choices[chosen_filter])(filter_value)
 
-            # if (len(filtered_items)):
-            #     for item in filtered_items:
-
+            if len(filtered_items):
+                for item in filtered_items:
+                    print(f"ID: {item['id']}, Nome: {item['name']}, Preço: R$ {str(item['price']).replace('.', ',')}")
+            else:
+                print("\nNão foram encontrados produtos para o filtro informado.\n")
 
         self.choose_view_handler()
 
@@ -242,9 +247,9 @@ class Presenter:
 
 presenter = Presenter()
 
-presenter.bootstrap()
-
 def graceful_shutdown():
     datasource.persists()
 
 atexit.register(graceful_shutdown)
+
+presenter.bootstrap()
