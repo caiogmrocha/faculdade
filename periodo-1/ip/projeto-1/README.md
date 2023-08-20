@@ -1,3 +1,15 @@
+# Sobre o projeto
+
+O projeto se trata de uma aplicação CLI de controle de estoque de produtos que permite ao usuário realizar as seguintes ações:
+
+1 - Listar produtos cadastrados
+2 - Filtrar produtos cadastrados
+3 - Detalhes de um produto cadastrado
+4 - Cadastrar um novo produto
+5 - Editar um produto existente
+6 - Excluir um produto existente
+7 - Ir para a home
+
 # Tarefas
 
 ## 1. Implementar acesso à base de dados (DataSource)
@@ -22,7 +34,7 @@
 - [x] Presenter.create_view
 - [x] Presenter.update_view
 - [x] Presenter.delete_view
-- [] Validações
+- [x] Validações
     - [x] Presenter.create_view
     - [x] Presenter.update_view
-    - [] Presenter.delete_view
+    - [x] Presenter.delete_view

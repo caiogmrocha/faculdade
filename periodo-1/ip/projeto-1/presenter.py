@@ -1,4 +1,3 @@
-import atexit
 import datetime
 from os import system
 from textwrap import dedent
@@ -82,7 +81,7 @@ class Presenter:
 
         if len(items):
             for item in items:
-                print(f"ID: {item['id']}, Nome: {item['name']}, Preço: R$ {str(item['price']).replace('.', ',')}")
+                print(f"ID: {item['id']:<6} Nome: {item['name']:<40} Preço: R$ {str(item['price']).replace('.', ','):<15}")
         else:
             print("Estoque vazio\n")
 
@@ -166,7 +165,7 @@ class Presenter:
 
             if len(filtered_items):
                 for item in filtered_items:
-                    print(f"ID: {item['id']}, Nome: {item['name']}, Preço: R$ {str(item['price']).replace('.', ',')}")
+                    print(f"ID: {item['id']:<6} Nome: {item['name']:<40} Preço: R$ {str(item['price']).replace('.', ','):<15}")
             else:
                 print("\nNão foram encontrados produtos para o filtro informado.\n")
 
@@ -250,9 +249,3 @@ class Presenter:
 
 presenter = Presenter()
 
-def graceful_shutdown():
-    datasource.persists()
-
-atexit.register(graceful_shutdown)
-
-presenter.bootstrap()
