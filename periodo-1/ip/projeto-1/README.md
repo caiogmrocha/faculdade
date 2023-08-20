@@ -23,6 +23,6 @@
 - [x] Presenter.update_view
 - [x] Presenter.delete_view
 - [] Validações
-    - [] Presenter.create_view
-    - [] Presenter.update_view
+    - [x] Presenter.create_view
+    - [x] Presenter.update_view
     - [] Presenter.delete_view

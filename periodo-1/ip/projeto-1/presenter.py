@@ -2,8 +2,10 @@ import atexit
 import datetime
 from os import system
 from textwrap import dedent
+from re import match
 
 from datasource import datasource
+from helpers import vinput, is_float, is_int, is_str
 
 class Presenter:
     available_view_choices = [1,2,3,4,5,6]
@@ -185,10 +187,10 @@ class Presenter:
 
         data = dict()
 
-        data['name'] = input("Nome do Produto: ")
-        data['description'] = input("Descrição do Produto: ")
-        data['price'] = float(input("Preço do Produto: "))
-        data['expiration_date'] = input(f"Data de Validade do Produto (##/##/####): ")
+        data['name'] = vinput("Nome do Produto: ", validator=lambda v: is_str(v) and len(v) > 0)
+        data['description'] = vinput("Descrição do Produto: ", validator=lambda v: is_str(v) and len(v) > 0)
+        data['price'] = float(vinput("Preço do Produto: ", validator=lambda v: is_float(v) and float(v) > 0))
+        data['expiration_date'] = vinput(f"Data de Validade do Produto (##/##/####): ", validator=lambda v: is_str(v) and len(v) > 0 and match(r"\d{2}/\d{2}/\d{4}", v))
 
         datasource.create(data)
 
@@ -211,11 +213,11 @@ class Presenter:
 
         data = dict()
 
-        item_id = int(input("ID do Produto: "))
-        data['name'] = input("Nome do Produto: ")
-        data['description'] = input("Descrição do Produto: ")
-        data['price'] = float(input("Preço do Produto: "))
-        data['expiration_date'] = input(f"Data de Validade do Produto (##/##/####): ")
+        item_id = int(vinput("ID do Produto: "), validator=lambda v: is_int(v) and (0 < int(v) <= 100000))
+        data['name'] = vinput("Nome do Produto: ", validator=lambda v: is_str(v) and len(v) > 0)
+        data['description'] = vinput("Descrição do Produto: ", validator=lambda v: is_str(v) and len(v) > 0)
+        data['price'] = float(vinput("Preço do Produto: "), validator=lambda v: is_float(v) and float(v) > 0)
+        data['expiration_date'] = vinput(f"Data de Validade do Produto (##/##/####): ", validator=lambda v: is_str(v) and len(v) > 0 and match(v, r"\d{2}/\d{2}/\d{4}"))
 
         datasource.update(item_id, data)
 
@@ -235,8 +237,9 @@ class Presenter:
         ###############################
 
         """))
+        int(vinput("Digite o ID do produto a ser deletado: "), validator=lambda v: is_int(v) and (0 < int(v) <= 100000))
 
-        item_id = int(input("Digite o ID do produto a ser deletado: "))
+        item_id = int(vinput("Digite o ID do produto a ser deletado: "), validator=lambda v: is_int(v) and (0 < int(v) <= 100000))
 
         datasource.delete(item_id)
 
