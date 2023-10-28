@@ -33,9 +33,9 @@ int equacao_verdadeira() {
 
 int main() {
     if (equacao_verdadeira()) {
-        printf("Pode-se concluir que a equação e verdadeira para inteiros positivos\n");
+        printf("Pode-se concluir que a equação é verdadeira para inteiros positivos\n");
     } else {
-        printf("Pode-se concluir que a equação e falsa para inteiros positivos\n");
+        printf("Pode-se concluir que a equação é falsa para inteiros positivos\n");
     }
 
     return 0;

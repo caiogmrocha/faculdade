@@ -10,6 +10,10 @@ O projeto se trata de uma aplicação CLI de controle de estoque de produtos que
 6 - Excluir um produto existente
 7 - Ir para a home
 
+# Como iniciar
+
+Para iniciar a aplicação é necessário estar com a versão 3.10.6 do Python e executar o comando `python3 index.py` na raiz do projeto.
+
 # Tarefas
 
 ## 1. Implementar acesso à base de dados (DataSource)
