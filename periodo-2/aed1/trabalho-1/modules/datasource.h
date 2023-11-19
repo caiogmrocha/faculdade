@@ -31,9 +31,9 @@ void inserir_posicao(Livro dados, int posicao);
 bool remover(int id);
 
 void listar_todos();
-void listar_disponiveis();
-void listar_emprestados();
-void listar_por_editora(char *editora);
+void listar_disponiveis(Livro** livros);
+void listar_emprestados(Livro** livros);
+void listar_por_editora(Livro** livros, char *editora);
 
 Livro buscar_por_id(int id);
 

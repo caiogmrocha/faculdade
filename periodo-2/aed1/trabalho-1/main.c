@@ -20,7 +20,7 @@ int main(void) {
   strcpy(novo_livro.titulo, "Titulo 1");
   strcpy(novo_livro.descricao, "Descrição 1");
   strcpy(novo_livro.editora, "Editora 3");
-  novo_livro.status = DISPONIVEL;
+  novo_livro.status = EMPRESTADO;
   novo_livro.ano = 2023;
 
   inserir_fim(novo_livro);
@@ -28,8 +28,15 @@ int main(void) {
   inserir_fim(novo_livro);
   inserir_fim(novo_livro);
   inserir_fim(novo_livro);
-
-  listar_disponiveis();
+  inserir_fim(novo_livro);
+  inserir_fim(novo_livro);
+  inserir_fim(novo_livro);
+  inserir_fim(novo_livro);
+  inserir_fim(novo_livro);
+  inserir_fim(novo_livro);
+  inserir_fim(novo_livro);
+  inserir_fim(novo_livro);
+  inserir_fim(novo_livro);
 
   tela_inicial();
 
