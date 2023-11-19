@@ -13,9 +13,7 @@ void escolher_tela() {
     switch(tela_selecionada) {
         case 1: system("clear"); listar_todos(lista); break;
 
-        // case 2: {
-
-        // } break;
+        case 2: system("clear"); listar_disponiveis(lista); break;
 
         // case 3: {
 
@@ -73,7 +71,16 @@ void tela_listagem_todos() {
     listar_todos();
 }
 
-void tela_listagem_disponiveis();
+void tela_listagem_disponiveis() {
+    if (lista.qtd == 0) {
+        printf("Não existem livros cadastrados");
+
+        return;
+    }
+
+    listar_disponiveis();
+}
+
 void tela_listagem_emprestados();
 void tela_listagem_por_editora();
 void tela_cadastro();

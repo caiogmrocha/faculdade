@@ -17,9 +17,9 @@
     - [] cadastrar no inicio
     - [] cadastrar no fim
     - [] cadastrar numa posição informada
-  - [] remoção
+  - [] remover
   - [] listagem
-    - [] todos 
+    - [x] todos 
     - [] disponiveis
     - [] emprestados
     - [] por editora
