@@ -14,35 +14,8 @@ int main(void) {
   lista.qtd = 0;
   lista.livros = NULL;
 
-  Livro novo_livro;
-
-  novo_livro.id = 1;
-  strcpy(novo_livro.titulo, "Titulo 1");
-  strcpy(novo_livro.descricao, "Descrição 1");
-  strcpy(novo_livro.editora, "Editora 3");
-  novo_livro.status = EMPRESTADO;
-  novo_livro.ano = 2023;
-
-  inserir_fim(novo_livro);
-  inserir_fim(novo_livro);
-  inserir_fim(novo_livro);
-  inserir_fim(novo_livro);
-  inserir_fim(novo_livro);
-  inserir_fim(novo_livro);
-  inserir_fim(novo_livro);
-  inserir_fim(novo_livro);
-  inserir_fim(novo_livro);
-  inserir_fim(novo_livro);
-  inserir_fim(novo_livro);
-  inserir_fim(novo_livro);
-  inserir_fim(novo_livro);
-  inserir_fim(novo_livro);
-
   tela_inicial();
-
   escolher_tela();
-
-  free(lista.livros);
 
   return 0;
 }

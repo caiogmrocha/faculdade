@@ -41,7 +41,7 @@ void inserir_posicao(Livro dados, int posicao) {
 
 }
 
-bool remover(int id) {
+void remover(int id) {
   for (int i = 0; i < lista.qtd; i++) {
     if (lista.livros[i].id == id) {
       for (int j = i; j < lista.qtd; j++) {

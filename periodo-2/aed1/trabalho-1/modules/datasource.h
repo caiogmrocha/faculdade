@@ -28,7 +28,7 @@ void inserir_inicio(Livro dados);
 void inserir_fim(Livro dados);
 void inserir_posicao(Livro dados, int posicao);
 
-bool remover(int id);
+void remover(int id);
 
 void listar_todos();
 void listar_disponiveis(Livro** livros);

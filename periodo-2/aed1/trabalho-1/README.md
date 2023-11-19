@@ -12,17 +12,17 @@
     - [x] disponiveis
     - [x] emprestados
     - [x] por editora
-- [] criar camada de apresentação
-  - [] cadastrar
-    - [] cadastrar no inicio
-    - [] cadastrar no fim
-    - [] cadastrar numa posição informada
-  - [] remover
-  - [] listagem
+- [x] criar camada de apresentação
+  - [x] cadastrar
+    - [x] cadastrar no inicio
+    - [x] cadastrar no fim
+    - [x] cadastrar numa posição informada
+  - [x] remover
+  - [x] listagem
     - [x] todos 
-    - [] disponiveis
-    - [] emprestados
-    - [] por editora
+    - [x] disponiveis
+    - [x] emprestados
+    - [x] por editora
 - [] persistência em arquivo .txt
 
 # Observações
