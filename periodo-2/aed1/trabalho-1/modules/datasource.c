@@ -29,7 +29,7 @@ void inserir_posicao(Livro dados, int posicao) {
 
   for (int i = 0; i < lista.qtd; i++) {
     if (i == posicao) {
-      for (int j = posicao + 1; j < lista.qtd; j++) {
+      for (int j = lista.qtd - 1; j >= posicao + 1; j--) {
         lista.livros[j] = lista.livros[j - 1];
       }
 
@@ -43,15 +43,14 @@ void inserir_posicao(Livro dados, int posicao) {
 void remover(int id) {
   for (int i = 0; i < lista.qtd; i++) {
     if (lista.livros[i].id == id) {
-      for (int j = i; j < lista.qtd; j++) {
-        lista.livros[j - 1] = lista.livros[j];
-
-        if (j == lista.qtd - 1) {
-          lista.qtd--;
-          lista.livros =
-              (Livro *)realloc(lista.livros, (lista.qtd) * sizeof(Livro));
-        }
+      for (int j = i; j < lista.qtd - 1; j++) {
+        lista.livros[j] = lista.livros[j + 1];
       }
+
+      lista.qtd--;
+      lista.livros = (Livro *)realloc(lista.livros, (lista.qtd) * sizeof(Livro));
+
+      break;
     }
   }
 }

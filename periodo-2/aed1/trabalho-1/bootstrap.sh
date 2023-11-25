@@ -1,3 +1,12 @@
+#!/bin/bash
+
+if [ ! -d "dist" ]; then
+    mkdir dist
+else
+    rm -rf dist
+    mkdir dist
+fi
+
 gcc -c ./modules/datasource.c -o ./dist/datasource.o
 gcc -c ./modules/presenter.c -o ./dist/presenter.o
 gcc -c main.c -o ./dist/main.o
