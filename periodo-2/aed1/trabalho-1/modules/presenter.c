@@ -292,13 +292,14 @@ void tela_visualizar_detalhes() {
 
   scanf("%d", &id);
 
-  Livro livro = buscar_por_id(id);
+  Livro livro;
+
+  buscar_por_id(id, &livro);
 
   printf("ID: %d\n", livro.id);
   printf("Titulo: %s\n", livro.titulo);
   printf("Descricao: %s\n", livro.descricao);
   printf("Editora: %s\n", livro.editora);
   printf("Ano: %d\n", livro.ano);
-  printf("Status: %s\n\n",
-         livro.status == DISPONIVEL ? "Disponivel" : "Emprestado");
+  printf("Status: %s\n\n", livro.status == DISPONIVEL ? "Disponivel" : "Emprestado");
 }

@@ -97,10 +97,10 @@ void listar_por_editora(Livro **livros, char *editora, int* qtd) {
   }
 }
 
-Livro buscar_por_id(int id) {
+void buscar_por_id(int id, Livro *dest) {
   for (int i = 0; i < lista.qtd; i++) {
     if (lista.livros[i].id == id) {
-      return lista.livros[i];
+      *dest = lista.livros[i];
     }
   }
 }

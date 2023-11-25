@@ -35,6 +35,6 @@ void listar_disponiveis(Livro** livros, int* qtd);
 void listar_emprestados(Livro** livros, int* qtd);
 void listar_por_editora(Livro** livros, char* editora, int* qtd);
 
-Livro buscar_por_id(int id);
+void buscar_por_id(int id, Livro *dest);
 
 #endif
