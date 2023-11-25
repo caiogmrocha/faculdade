@@ -72,17 +72,17 @@ void escolher_tela() {
 }
 
 void tela_inicial() {
-  printf("###############################\n");
-  printf("#                             #\n");
-  printf("#        Seja Bem-vindo       #\n");
-  printf("#                             #\n");
-  printf("#      Gestão de Produtos     #\n");
-  printf("#                             #\n");
-  printf("###############################\n");
-  printf("#                             #\n");
-  printf("#     Selecione uma opção     #\n");
-  printf("#                             #\n");
-  printf("###############################\n\n");
+  printf("################################\n");
+  printf("#                              #\n");
+  printf("#        Seja Bem-vindo        #\n");
+  printf("#                              #\n");
+  printf("#          Biblioteca          #\n");
+  printf("#                              #\n");
+  printf("################################\n");
+  printf("#                              #\n");
+  printf("#     Selecione uma opção      #\n");
+  printf("#                              #\n");
+  printf("################################\n\n");
   printf("1 - Listar todos os livros\n");
   printf("2 - Listar livros disponíveis\n");
   printf("3 - Listar livros emprestados\n");
@@ -113,9 +113,10 @@ void tela_listagem_todos() {
 }
 
 void tela_listagem_disponiveis() {
+  int qtd = 0;
   Livro *lista_disponiveis = NULL;
 
-  listar_disponiveis(&lista_disponiveis);
+  listar_disponiveis(&lista_disponiveis, &qtd);
 
   if (lista_disponiveis == NULL) {
     printf("Não existem livros disponiveis\n\n");
@@ -125,8 +126,7 @@ void tela_listagem_disponiveis() {
 
   printf("ID: %-4s Titulo: %-16s Editora: %-20s\n", " ", " ", " ");
 
-  for (int i = 0; i < sizeof(lista_disponiveis) / sizeof(lista_disponiveis[0]);
-       i++) {
+  for (int i = 0; i < qtd; i++) {
     printf("%-8d %-24s %-23s\n", lista_disponiveis[i].id,
            lista_disponiveis[i].titulo, lista_disponiveis[i].editora);
   }
@@ -137,20 +137,20 @@ void tela_listagem_disponiveis() {
 }
 
 void tela_listagem_emprestados() {
+  int qtd = 0;
   Livro *lista_emprestados = NULL;
 
-  listar_emprestados(&lista_emprestados);
+  listar_emprestados(&lista_emprestados, &qtd);
 
   if (lista_emprestados == NULL) {
-    printf("Não existem livros emprestados\n");
+    printf("Não existem livros emprestados\n\n");
 
     return;
   }
 
   printf("ID: %-4s Titulo: %-16s Editora: %-20s\n", " ", " ", " ");
 
-  for (int i = 0; i < sizeof(lista_emprestados) / sizeof(lista_emprestados[0]);
-       i++) {
+  for (int i = 0; i < qtd; i++) {
     printf("%-8d %-24s %-23s\n", lista_emprestados[i].id,
            lista_emprestados[i].titulo, lista_emprestados[i].editora);
   }
@@ -166,9 +166,10 @@ void tela_listagem_por_editora() {
   printf("Digite o nome da editora: \n");
   scanf("%s", editora);
 
+  int qtd = 0;
   Livro *lista_por_editora = NULL;
 
-  listar_por_editora(&lista_por_editora, editora);
+  listar_por_editora(&lista_por_editora, editora, &qtd);
 
   if (lista_por_editora == NULL) {
     printf("Não existem livros para a editora %s\n", editora);
@@ -178,8 +179,7 @@ void tela_listagem_por_editora() {
 
   printf("ID: %-4s Titulo: %-16s\n", " ", " ");
 
-  for (int i = 0; i < sizeof(lista_por_editora) / sizeof(lista_por_editora[0]);
-       i++) {
+  for (int i = 0; i < qtd; i++) {
     printf("%-8d %-24s\n", lista_por_editora[i].id,
            lista_por_editora[i].titulo);
   }
