@@ -204,12 +204,19 @@ void tela_cadastro_inicio() {
   printf("Digite o ano de publicacao do livro: ");
   scanf("%d", &livro.ano);
 
-  livro.status = DISPONIVEL;
-  livro.id = lista.qtd;
+  if (strlen(livro.titulo) == 0 || strlen(livro.descricao) == 0 ||
+    strlen(livro.editora) == 0 || livro.ano <= 0 || livro.ano > 2023) {
+    printf("Erro: Dados inválidos. Certifique-se de preencher todos os campos corretamente.\n");
+    
+    tela_cadastro_inicio();
+  } else {
+    livro.status = DISPONIVEL;
+    livro.id = lista.qtd;
 
-  inserir_inicio(livro);
+    inserir_inicio(livro);
 
-  printf("Livro cadastrado com sucesso!\n\n");
+    printf("Livro cadastrado com sucesso!\n\n");
+  }
 }
 
 void tela_cadastro_fim() {
@@ -229,12 +236,19 @@ void tela_cadastro_fim() {
   printf("Digite o ano de publicacao do livro: ");
   scanf("%d", &livro.ano);
 
-  livro.status = DISPONIVEL;
-  livro.id = lista.qtd;
+  if (strlen(livro.titulo) == 0 || strlen(livro.descricao) == 0 ||
+    strlen(livro.editora) == 0 || livro.ano <= 0 || livro.ano > 2023) {
+    printf("Erro: Dados inválidos. Certifique-se de preencher todos os campos corretamente.\n");
+    
+    tela_cadastro_fim();
+  } else {
+    livro.status = DISPONIVEL;
+    livro.id = lista.qtd;
 
-  inserir_fim(livro);
+    inserir_fim(livro);
 
-  printf("Livro cadastrado com sucesso!\n\n");
+    printf("Livro cadastrado com sucesso!\n\n");
+  }
 }
 
 void tela_cadastro_posicao_especifica() {
@@ -254,23 +268,30 @@ void tela_cadastro_posicao_especifica() {
   printf("Digite o ano de publicacao do livro: ");
   scanf("%d", &livro.ano);
 
-  livro.status = DISPONIVEL;
-  livro.id = lista.qtd;
-
-  int posicao;
-
-  printf("Digite a posicao de cadastro do livro: ");
-  scanf("%d", &posicao);
-
-  if (posicao < 0) {
-    inserir_inicio(livro);
-  } else if (posicao >= lista.qtd) {
-    inserir_fim(livro);
+  if (strlen(livro.titulo) == 0 || strlen(livro.descricao) == 0 ||
+    strlen(livro.editora) == 0 || livro.ano <= 0 || livro.ano > 2023) {
+    printf("Erro: Dados inválidos. Certifique-se de preencher todos os campos corretamente.\n");
+    
+    tela_cadastro_posicao_especifica();
   } else {
-    inserir_posicao(livro, posicao);
-  }
+    livro.status = DISPONIVEL;
+    livro.id = lista.qtd;
 
-  printf("Livro cadastrado com sucesso!\n\n");
+    int posicao;
+
+    printf("Digite a posicao de cadastro do livro: ");
+    scanf("%d", &posicao);
+
+    if (posicao < 0) {
+      inserir_inicio(livro);
+    } else if (posicao >= lista.qtd) {
+      inserir_fim(livro);
+    } else {
+      inserir_posicao(livro, posicao);
+    }
+
+    printf("Livro cadastrado com sucesso!\n\n");
+  }
 }
 
 void tela_remocao() {

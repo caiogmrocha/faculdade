@@ -14,20 +14,17 @@
     - [x] por editora
 - [x] criar camada de apresentação
   - [x] cadastrar
+    - [x] validar campos
     - [x] cadastrar no inicio
     - [x] cadastrar no fim
     - [x] cadastrar numa posição informada
   - [x] remover
-  - [] visualizar detalhes
+  - [x] visualizar detalhes
   - [x] emprestar livro
   - [x] listagem
     - [x] todos 
     - [x] disponiveis
     - [x] emprestados
     - [x] por editora
+  - [ ] emprestar livro
 - [x] persistência em arquivo .txt
-
-# Observações
-
-- [] as operações do TAD devem ser implementadas em um módulo à parte
-- [] as operações 
