@@ -3,11 +3,15 @@
 #include <stdlib.h>
 #include <string.h>
 
+const int INITIAL_CAPACITY = 10;
 ListaLivros lista;
 
 void inserir_inicio(Livro dados) {
   lista.qtd++;
-  lista.livros = (Livro *)realloc(lista.livros, (lista.qtd) * sizeof(Livro));
+
+  if (lista.qtd > INITIAL_CAPACITY) {
+    lista.livros = (Livro *)realloc(lista.livros, (lista.qtd) * sizeof(Livro));
+  }
 
   for (int i = lista.qtd - 1; i >= 0 ; i--) {
     lista.livros[i] = lista.livros[i - 1];
@@ -18,14 +22,20 @@ void inserir_inicio(Livro dados) {
 
 void inserir_fim(Livro dados) {
   lista.qtd++;
-  lista.livros = (Livro *)realloc(lista.livros, (lista.qtd) * sizeof(Livro));
+
+  if (lista.qtd > INITIAL_CAPACITY) {
+    lista.livros = (Livro *)realloc(lista.livros, (lista.qtd) * sizeof(Livro));
+  }
 
   lista.livros[lista.qtd - 1] = dados;
 }
 
 void inserir_posicao(Livro dados, int posicao) {
   lista.qtd++;
-  lista.livros = (Livro *)realloc(lista.livros, (lista.qtd) * sizeof(Livro));
+  
+  if (lista.qtd > INITIAL_CAPACITY) {
+    lista.livros = (Livro *)realloc(lista.livros, (lista.qtd) * sizeof(Livro));
+  }
 
   for (int i = 0; i < lista.qtd; i++) {
     if (i == posicao) {
@@ -102,5 +112,61 @@ void buscar_por_id(int id, Livro *dest) {
     if (lista.livros[i].id == id) {
       *dest = lista.livros[i];
     }
+  }
+}
+
+void persist_database() {
+  FILE *file = fopen("database.txt", "w");
+
+  int id;
+  char titulo[100];
+  char descricao[100];
+  enum StatusLivro status;
+  char editora[50];
+  int ano;
+
+  for (int i = 0; i < lista.qtd; i++) {
+    fprintf(
+      file,
+      "%d;%s;%s;%d;%s;%d\n",
+      lista.livros[i].id,
+      lista.livros[i].titulo,
+      lista.livros[i].descricao,
+      lista.livros[i].status,
+      lista.livros[i].editora,
+      lista.livros[i].ano);
+  }
+
+  fclose(file);
+}
+
+void load_database() {
+  FILE *file = fopen("database.txt", "r");
+
+  if (file == NULL)
+    return;
+
+  lista.qtd = 0;
+
+  Livro livro;
+  int status;
+
+  livro.status = status;
+
+  while (
+    fscanf(
+      file,
+      "%d;%100[^;];%100[^;];%d;%50[^;];%d\n\r",
+      &livro.id,
+      livro.titulo,
+      livro.descricao,
+      &status,
+      livro.editora,
+      &livro.ano
+    ) > 0
+  ) {
+    lista.qtd++;
+    lista.livros = (Livro *)realloc(lista.livros, lista.qtd * sizeof(Livro));
+    lista.livros[lista.qtd - 1] = livro;
   }
 }

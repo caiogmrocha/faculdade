@@ -2,6 +2,7 @@
 #include "datasource.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 void escolher_tela() {
   printf("Selecione uma tela: ");

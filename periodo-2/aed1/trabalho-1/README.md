@@ -1,6 +1,6 @@
 # Detalhes do Projeto
 
-- [] a lista de livros deve iniciar com uma alocação de 10 livros
+- [x] a lista de livros deve iniciar com uma alocação de 10 livros
 - [x] criar camada de acesso à base de dados
   - [x] inserção
     - [x] inserir no inicio
@@ -26,5 +26,4 @@
     - [x] disponiveis
     - [x] emprestados
     - [x] por editora
-  - [ ] emprestar livro
 - [x] persistência em arquivo .txt
