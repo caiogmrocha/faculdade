@@ -18,12 +18,14 @@
     - [x] cadastrar no fim
     - [x] cadastrar numa posição informada
   - [x] remover
+  - [] visualizar detalhes
+  - [x] emprestar livro
   - [x] listagem
     - [x] todos 
     - [x] disponiveis
     - [x] emprestados
     - [x] por editora
-- [] persistência em arquivo .txt
+- [x] persistência em arquivo .txt
 
 # Observações
 
