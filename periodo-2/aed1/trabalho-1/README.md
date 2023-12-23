@@ -1,4 +1,8 @@
-# Detalhes do Projeto
+# Como iniciar o sistema
+
+Para iniciar o sistema, basta, na pasta raiz do projeto, executar o comando `bash boostrap.sh` em ambientes Unix ou `./bootstrap.sh` em ambientes Windows.
+
+# Tarefas concluídas
 
 - [x] a lista de livros deve iniciar com uma alocação de 10 livros
 - [x] criar camada de acesso à base de dados

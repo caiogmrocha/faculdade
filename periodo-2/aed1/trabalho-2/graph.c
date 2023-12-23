@@ -2,17 +2,15 @@
 #include <stdio.h>
 #include "graph.h"
 
-
-void initGraph(struct Graph **graph, int amount) {
+void initGraph(struct Graph **graph) {
     *graph = (struct Graph *) malloc(sizeof(struct Graph));
-    (*graph)->vertices = (struct Vertex *) malloc(amount * sizeof(struct Vertex));
+}
 
-    for (int i = 0; i < amount; i++) {
-        (*graph)->vertices[i].id = i;
-        (*graph)->vertices[i].next = NULL;
-    }
+void addVertex(struct Graph **graph, int id) {
+    (*graph)->vertices = (struct Vertex *) malloc(++(*graph)->amount * sizeof(struct Vertex));
 
-    (*graph)->amount = amount;
+    (*graph)->vertices[(*graph)->amount-1].id = id;
+    (*graph)->vertices[(*graph)->amount-1].next = NULL;
 }
 
 void addEdge(struct Vertex *vertex, int id) {

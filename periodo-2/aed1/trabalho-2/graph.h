@@ -9,11 +9,12 @@ struct Vertex {
 
 // Grafo representado por uma matriz de adjacência de vértices
 struct Graph {
-    struct Vertex *vertices;
     int amount;
+    struct Vertex *vertices;
 };
 
-void initGraph(struct Graph **graph, int amount);
+void initGraph(struct Graph **graph);
+void addVertex(struct Graph **graph, int id);
 void addEdge(struct Vertex *vertex, int id);
 void printGraph(struct Graph *graph);
 
