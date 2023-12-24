@@ -1,22 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "modules/linkedlist.h"
+#include "modules/stack.h"
 
 int main() {
-    struct LinkedListNode *list = NULL;
+    struct LinkedListNode *stack = NULL;
 
-    addLast(&list, 1);
-    addLast(&list, 2);
-    addLast(&list, 3);
-    addLast(&list, 4);
-    addLast(&list, 5);
-    addLast(&list, 6);
-    removeLast(&list);
-    removeLast(&list);
-    removeLast(&list);
+    push(&stack, 1);
+    push(&stack, 2);
+    push(&stack, 3);
+    push(&stack, 4);
+    push(&stack, 5);
+    pop(&stack);
+    pop(&stack);
 
-    struct LinkedListNode *iterator = list;
+    struct LinkedListNode *iterator = stack;
 
     while (iterator != NULL) {
         printf("%d\n", iterator->value);
