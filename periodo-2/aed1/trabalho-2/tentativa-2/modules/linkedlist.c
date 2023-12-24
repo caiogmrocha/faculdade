@@ -34,7 +34,13 @@ void addLast(struct LinkedListNode **list, int value) {
 }
 
 void removeFirst(struct LinkedListNode **list) {
+    if (*list == NULL) return;
 
+    struct LinkedListNode *temp = *list;
+
+    *list = (*list)->next;
+
+    free(temp);
 }
 
 void removeLast(struct LinkedListNode **list) {

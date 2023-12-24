@@ -6,12 +6,15 @@
 int main() {
     struct LinkedListNode *list = NULL;
 
-    addFirst(&list, 1);
-    addFirst(&list, 2);
-    addFirst(&list, 3);
-    addFirst(&list, 4);
-    addFirst(&list, 5);
-    addFirst(&list, 6);
+    addLast(&list, 1);
+    addLast(&list, 2);
+    addLast(&list, 3);
+    addLast(&list, 4);
+    addLast(&list, 5);
+    addLast(&list, 6);
+    removeFirst(&list);
+    removeFirst(&list);
+    removeFirst(&list);
 
     struct LinkedListNode *iterator = list;
 
