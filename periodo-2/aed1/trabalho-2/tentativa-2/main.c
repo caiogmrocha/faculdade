@@ -12,9 +12,9 @@ int main() {
     addLast(&list, 4);
     addLast(&list, 5);
     addLast(&list, 6);
-    removeFirst(&list);
-    removeFirst(&list);
-    removeFirst(&list);
+    removeLast(&list);
+    removeLast(&list);
+    removeLast(&list);
 
     struct LinkedListNode *iterator = list;
 

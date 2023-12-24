@@ -44,5 +44,15 @@ void removeFirst(struct LinkedListNode **list) {
 }
 
 void removeLast(struct LinkedListNode **list) {
+    if (*list == NULL) return;
 
+    struct LinkedListNode *iterator = *list;
+
+    while (iterator->next->next != NULL) {
+        iterator = iterator->next;
+    }
+
+    free(iterator->next);
+    
+    iterator->next = NULL;
 }
