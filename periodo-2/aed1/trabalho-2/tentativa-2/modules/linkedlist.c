@@ -53,6 +53,20 @@ void removeLast(struct LinkedListNode **list) {
     }
 
     free(iterator->next);
-    
+
     iterator->next = NULL;
+}
+
+struct LinkedListNode *peekFirst(struct LinkedListNode *list) {
+    return list;
+}
+
+struct LinkedListNode *peekLast(struct LinkedListNode *list) {
+    struct LinkedListNode *iterator = list;
+
+    while (iterator->next != NULL) {
+        iterator = iterator->next;
+    }
+
+    return iterator;
 }
