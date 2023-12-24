@@ -1,24 +1,31 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "modules/stack.h"
+#include "modules/graph.h"
 
 int main() {
-    struct LinkedListNode *stack = NULL;
+    struct Graph *graph = createGraph();
 
-    push(&stack, 1);
-    push(&stack, 2);
-    push(&stack, 3);
-    push(&stack, 4);
-    push(&stack, 5);
-    pop(&stack);
-    pop(&stack);
+    addNode(&graph, 1);
+    addNode(&graph, 2);
+    // addNode(&graph, 3);
+    // addNode(&graph, 4);
+    // addNode(&graph, 5);
 
-    struct LinkedListNode *iterator = stack;
+    for (int i = 0; i < graph->amount; i++) {
+        struct LinkedListNode *iterator = graph->vertices[i];
 
-    while (iterator != NULL) {
-        printf("%d\n", iterator->value);
-        iterator = iterator->next;
+        printf("Vértice %d: ", iterator->value);
+
+        while (iterator != NULL) {
+            if (iterator->next == NULL) {
+                printf("%d\n", iterator->value);
+            } else {
+                printf("%d > ", iterator->value);
+            }
+
+            iterator = iterator->next;
+        }
     }
 
     return 0;
