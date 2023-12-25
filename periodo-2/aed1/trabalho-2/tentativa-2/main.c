@@ -6,28 +6,29 @@
 int main() {
     struct Graph *graph = createGraph();
 
+    addNode(&graph, 0);
     addNode(&graph, 1);
     addNode(&graph, 2);
     addNode(&graph, 3);
     addNode(&graph, 4);
-    addNode(&graph, 5);
+    addEdge(&graph, graph->vertices[0], graph->vertices[1]);
+    addEdge(&graph, graph->vertices[1], graph->vertices[2]);
 
     for (int i = 0; i < graph->verticesAmount; i++) {
         struct Vertex *vertex = graph->vertices[i];
 
-        printf("Vértice %d: ", vertex->value);
+        printf("Adjacências do V%d: ", vertex->id);
+
+        printf("[ ");
 
         for (int j = 0; j < vertex->edgesAmount; j++) {
-            printf("%d ", vertex->edgesArray[j].value);
-
             if (j == vertex->edgesAmount - 1) {
-                printf("%d", vertex->edgesArray[j].value);
+                printf("%d", vertex->edgesArray[j].id);
             } else {
-                printf("%d > ", vertex->edgesArray[j].value);
+                printf("%d, ", vertex->edgesArray[j].id);
             }
         }
-
-        printf("\n");
+        printf(" ]\n");
     }
 
     return 0;

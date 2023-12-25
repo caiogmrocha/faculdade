@@ -4,9 +4,10 @@
 #include "linkedlist.h"
 
 struct Vertex {
-    int value;
+    int id;
+    int visited;
     int edgesAmount;
-    struct LinkedListNode *edgesArray;
+    struct Vertex *edgesArray;
 };
 
 struct Graph {
@@ -15,7 +16,7 @@ struct Graph {
 };
 
 struct Graph *createGraph();
-void addNode(struct Graph **graph, int value);
-void addEdge(struct Graph **graph, struct Vertex **vertex1, struct Vertex **vertex2);
+void addNode(struct Graph **graph, int id);
+void addEdge(struct Graph **graph, struct Vertex *vertex1, struct Vertex *vertex2);
 
 #endif
