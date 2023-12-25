@@ -3,19 +3,19 @@
 
 #include "linkedlist.h"
 
-/**
- * TAD que representa um grafo.
- * 
- * @param vertices lista de adjacências.
- * @param amount quantidade de vértices.
-*/
+struct Vertex {
+    int value;
+    int edgesAmount;
+    struct LinkedListNode *edgesArray;
+};
+
 struct Graph {
-    struct LinkedListNode **vertices;
-    int amount;
+    int verticesAmount;
+    struct Vertex **vertices;
 };
 
 struct Graph *createGraph();
 void addNode(struct Graph **graph, int value);
-void addEdge(struct Graph **graph, struct LinkedListNode *vertex1, struct LinkedListNode *vertex2);
+void addEdge(struct Graph **graph, struct Vertex **vertex1, struct Vertex **vertex2);
 
 #endif

@@ -8,24 +8,26 @@ int main() {
 
     addNode(&graph, 1);
     addNode(&graph, 2);
-    // addNode(&graph, 3);
-    // addNode(&graph, 4);
-    // addNode(&graph, 5);
+    addNode(&graph, 3);
+    addNode(&graph, 4);
+    addNode(&graph, 5);
 
-    for (int i = 0; i < graph->amount; i++) {
-        struct LinkedListNode *iterator = graph->vertices[i];
+    for (int i = 0; i < graph->verticesAmount; i++) {
+        struct Vertex *vertex = graph->vertices[i];
 
-        printf("Vértice %d: ", iterator->value);
+        printf("Vértice %d: ", vertex->value);
 
-        while (iterator != NULL) {
-            if (iterator->next == NULL) {
-                printf("%d\n", iterator->value);
+        for (int j = 0; j < vertex->edgesAmount; j++) {
+            printf("%d ", vertex->edgesArray[j].value);
+
+            if (j == vertex->edgesAmount - 1) {
+                printf("%d", vertex->edgesArray[j].value);
             } else {
-                printf("%d > ", iterator->value);
+                printf("%d > ", vertex->edgesArray[j].value);
             }
-
-            iterator = iterator->next;
         }
+
+        printf("\n");
     }
 
     return 0;

@@ -5,7 +5,7 @@
 struct Graph *createGraph() {
     struct Graph *graph = (struct Graph *) malloc(sizeof(struct Graph));
 
-    graph->amount = 0;
+    graph->verticesAmount = 0;
     graph->vertices = NULL;
 
     return graph;
@@ -17,27 +17,19 @@ void addNode(struct Graph **graph, int value) {
         exit(1);
     }
 
-    (*graph)->amount += 1;
+    (*graph)->verticesAmount += 1;
 
-    printf("amount: %d\n", (*graph)->amount);
-
-    if ((*graph)->vertices == NULL) {
-        (*graph)->vertices = (struct LinkedListNode **) malloc((*graph)->amount * sizeof(struct LinkedListNode *));
-    } else {
-        (*graph)->vertices = (struct LinkedListNode **) realloc((*graph)->vertices, (*graph)->amount * sizeof(struct LinkedListNode *));
-    }
+    (*graph)->vertices = (struct Vertex **) realloc((*graph)->vertices, ((*graph)->verticesAmount + 1) * sizeof(struct Vertex *));
 
     if ((*graph)->vertices == NULL) {
         fprintf(stderr, "Erro ao tentar alocar dinamicamente os vértice do grafo.\n");
         exit(1);
     }
 
-    struct LinkedListNode *newNode = (struct LinkedListNode *) malloc(sizeof(struct LinkedListNode));
+    struct Vertex *newVertex = (struct Vertex *) malloc(sizeof(struct Vertex));
 
-    newNode->value = value;
-    newNode->next = NULL;
+    newVertex->value = value;
+    newVertex->edgesAmount = 0;
 
-    (*graph)->vertices[(*graph)->amount - 1] = newNode;
+    (*graph)->vertices[(*graph)->verticesAmount - 1] = newVertex;
 }
-
-void addEdge(struct Graph **graph, struct LinkedListNode *vertex1, struct LinkedListNode *vertex2);
