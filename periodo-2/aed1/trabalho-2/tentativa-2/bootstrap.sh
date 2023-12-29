@@ -13,4 +13,8 @@ gcc -c ./modules/graph.c -o ./modules/graph.o
 gcc -c main.c -o main.o
 gcc -g -Wall -Werror main.c ./modules/linkedlist.c ./modules/stack.c ./modules/graph.c -o ./dist/a.out
 
-./dist/a.out
+arg1=$1
+
+echo "arg1: $arg1"
+
+./dist/a.out $arg1
