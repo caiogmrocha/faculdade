@@ -18,5 +18,8 @@ struct Graph {
 struct Graph *createGraph();
 void addNode(struct Graph **graph, int id);
 void addEdge(struct Graph **graph, struct Vertex *vertex1, struct Vertex *vertex2);
+void debugGraph(struct Graph *graph);
+void debugVertex(struct Vertex *vertex);
+void freeGraph(struct Graph *graph);
 
 #endif
