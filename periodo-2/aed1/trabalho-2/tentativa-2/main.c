@@ -1,9 +1,28 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include "modules/graph.h"
 
 void readMaze(char *path, char ***maze, int *numRows, int *numCols);
+
+// create a function to pretty print maze with an * in an specific position
+
+void printMaze(char **maze, int numRows, int numCols, int row, int col) {
+    for (int i = 0; i < numRows; i++) {
+        for (int j = 0; j < numCols; j++) {
+
+            if (i == row && j == col && maze[i][j] == ' ') {
+                printf("*");
+            } else {
+                printf("%c", maze[i][j]);
+            }
+        }
+
+        // printf("\n");
+    }
+}
+
 
 int main(int argc, char *argv[]) {
     struct Graph *graph = createGraph();
@@ -21,41 +40,49 @@ int main(int argc, char *argv[]) {
     for (int i = 0; i < numRows; i++) {
         for (int j = 0; j < numCols; j++) {
             if (maze[i][j] == ' ') {
-                addNode(&graph, index);
+                addNode(&graph, index, i, j);
+                system("clear");
+                debugVertex(graph->vertices[index]);
+                printMaze(maze, numRows, numCols, i, j);
+                usleep(10000L);
                 index++;
             }
         }
     }
 
-    int diff = -index;
-
     for (int i = 0; i < numRows; i++) {
         for (int j = 0; j < numCols; j++) {
-            // DIREITA
-            if (j < numRows && index + diff < graph->verticesAmount && maze[i][j] == ' ' && maze[i][j+1] == ' ') {
-                addEdge(&graph, graph->vertices[index + diff], graph->vertices[index + diff + 1]);
-                addEdge(&graph, graph->vertices[index + diff + 1], graph->vertices[index + diff]);
-            }
+            if (maze[i][j] == ' ') {
+                // CIMA
+                struct Vertex *vertex1 = peekNode(graph, i, j);
 
-            // BAIXO
-            if (i < numCols && index + diff + numCols < graph->verticesAmount && maze[i][j] == ' ' && maze[i+1][j] == ' ') {
-                addEdge(&graph, graph->vertices[index + diff], graph->vertices[index + diff + numCols]);
-                addEdge(&graph, graph->vertices[index + diff + numCols], graph->vertices[index + diff]);
-            }
+                if (i - 1 >= 0 && maze[i][j] == ' ' && maze[i-1][j] == ' ') {
+                    struct Vertex *vertex2 = peekNode(graph, i-1, j);
+                    addEdge(&graph, vertex1, vertex2);
+                    addEdge(&graph, vertex2, vertex1);
+                }
 
-            // ESQUERDA
-            if (j-1 >= 0 && index + diff < graph->verticesAmount && maze[i][j] == ' ' && maze[i][j-1] == ' ') {
-                addEdge(&graph, graph->vertices[index + diff], graph->vertices[index + diff - 1]);
-                addEdge(&graph, graph->vertices[index + diff - 1], graph->vertices[index + diff]);
-            }
+                // BAIXO
+                if (i + 1 < numRows && maze[i][j] == ' ' && maze[i+1][j] == ' ') {
+                    struct Vertex *vertex2 = peekNode(graph, i+1, j);
+                    addEdge(&graph, vertex1, vertex2);
+                    addEdge(&graph, vertex2, vertex1);
+                }
 
-            // CIMA
-            if (i-1 >= 0 && index + diff < graph->verticesAmount && maze[i][j] == ' ' && maze[i-1][j] == ' ') {
-                addEdge(&graph, graph->vertices[index + diff], graph->vertices[index + diff - numCols]);
-                addEdge(&graph, graph->vertices[index + diff - numCols], graph->vertices[index + diff]);
-            }
+                // ESQUERDA
+                if (j - 1 >= 0 && maze[i][j] == ' ' && maze[i][j-1] == ' ') {
+                    struct Vertex *vertex2 = peekNode(graph, i, j-1);
+                    addEdge(&graph, vertex1, vertex2);
+                    addEdge(&graph, vertex2, vertex1);
+                }
 
-            diff++;
+                // DIREITA
+                if (j + 1 < numCols && maze[i][j] == ' ' && maze[i][j+1] == ' ') {
+                    struct Vertex *vertex2 = peekNode(graph, i, j+1);
+                    addEdge(&graph, vertex1, vertex2);
+                    addEdge(&graph, vertex2, vertex1);
+                }
+            }
         }
     }
 

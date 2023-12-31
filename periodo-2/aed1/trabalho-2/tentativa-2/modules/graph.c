@@ -11,7 +11,7 @@ struct Graph *createGraph() {
     return graph;
 }
 
-void addNode(struct Graph **graph, int id) {
+void addNode(struct Graph **graph, int id, int x, int y) {
     if (*graph == NULL) {
         fprintf(stderr, "Grafo iniciado de forma incorreta.\n");
         exit(1);
@@ -29,6 +29,8 @@ void addNode(struct Graph **graph, int id) {
     struct Vertex *newVertex = (struct Vertex *) malloc(sizeof(struct Vertex));
 
     newVertex->id = id;
+    newVertex->x = x;
+    newVertex->y = y;
     newVertex->visited = 0;
     newVertex->edgesAmount = 0;
     newVertex->edgesArray = NULL;
@@ -121,4 +123,14 @@ void freeGraph(struct Graph *graph) {
     if (graph != NULL) {
         free(graph);
     }
+}
+
+struct Vertex *peekNode(struct Graph *graph, int x, int y) {
+    for (int i = 0; i < graph->verticesAmount; i++) {
+        if (graph->vertices[i]->x == x && graph->vertices[i]->y == y) {
+            return graph->vertices[i];
+        }
+    }
+
+    return NULL;
 }
