@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include "linkedlist.h"
 
-void addFirst(struct LinkedListNode **list, int value) {
+void addFirst(struct LinkedListNode **list, void *value) {
     if (*list == NULL) {
         *list = (struct LinkedListNode *) malloc(sizeof(struct LinkedListNode));
         (*list)->value = value;
@@ -14,7 +14,7 @@ void addFirst(struct LinkedListNode **list, int value) {
     }
 }
 
-void addLast(struct LinkedListNode **list, int value) {
+void addLast(struct LinkedListNode **list, void *value) {
     if (*list == NULL) {
         *list = (struct LinkedListNode *) malloc(sizeof(struct LinkedListNode));
         (*list)->value = value;
@@ -51,7 +51,7 @@ void removeLast(struct LinkedListNode **list) {
     while (iterator->next->next != NULL) {
         iterator = iterator->next;
     }
-
+ 
     free(iterator->next);
 
     iterator->next = NULL;
