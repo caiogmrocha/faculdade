@@ -3,8 +3,8 @@
 
 #include "linkedlist.h"
 
-void push(struct LinkedListNode **stack, int value);
-void pop(struct LinkedListNode **stack);
+void push(struct LinkedListNode **stack, void *value);
+struct LinkedListNode *pop(struct LinkedListNode **stack);
 struct LinkedListNode *peek(struct LinkedListNode *stack);
 
 #endif

@@ -2,14 +2,14 @@
 #define H_LINKEDLIST
 
 struct LinkedListNode {
-    int value;
+    void *value;
     struct LinkedListNode *next;
 };
 
-void addFirst(struct LinkedListNode **list, int value);
-void addLast(struct LinkedListNode **list, int value);
-void removeFirst(struct LinkedListNode **list);
-void removeLast(struct LinkedListNode **list);
+void addFirst(struct LinkedListNode **list, void *value);
+void addLast(struct LinkedListNode **list, void *value);
+struct LinkedListNode *removeFirst(struct LinkedListNode **list);
+struct LinkedListNode *removeLast(struct LinkedListNode **list);
 struct LinkedListNode *peekFirst(struct LinkedListNode *list);
 struct LinkedListNode *peekLast(struct LinkedListNode *list);
 

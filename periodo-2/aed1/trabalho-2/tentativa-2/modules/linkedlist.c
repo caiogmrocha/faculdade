@@ -33,18 +33,18 @@ void addLast(struct LinkedListNode **list, void *value) {
     }
 }
 
-void removeFirst(struct LinkedListNode **list) {
-    if (*list == NULL) return;
+struct LinkedListNode *removeFirst(struct LinkedListNode **list) {
+    if (*list == NULL) return NULL;
 
     struct LinkedListNode *temp = *list;
 
     *list = (*list)->next;
 
-    free(temp);
+    return temp;
 }
 
-void removeLast(struct LinkedListNode **list) {
-    if (*list == NULL) return;
+struct LinkedListNode *removeLast(struct LinkedListNode **list) {
+    if (*list == NULL) return NULL;
 
     struct LinkedListNode *iterator = *list;
 
@@ -52,9 +52,11 @@ void removeLast(struct LinkedListNode **list) {
         iterator = iterator->next;
     }
  
-    free(iterator->next);
+    struct LinkedListNode *temp = iterator->next;
 
     iterator->next = NULL;
+
+    return temp;
 }
 
 struct LinkedListNode *peekFirst(struct LinkedListNode *list) {

@@ -2,12 +2,12 @@
 #include "linkedlist.h"
 #include "stack.h"
 
-void push(struct LinkedListNode **stack, int value) {
+void push(struct LinkedListNode **stack, void *value) {
     addLast(stack, value);
 }
 
-void pop(struct LinkedListNode **stack) {
-    removeLast(stack);
+struct LinkedListNode *pop(struct LinkedListNode **stack) {
+    return removeLast(stack);
 }
 
 struct LinkedListNode *peek(struct LinkedListNode *stack) {
