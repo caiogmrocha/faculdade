@@ -8,16 +8,18 @@ public class Baralho {
     private int tamanho;
 
     public Baralho() {
-        this.tamanho = 56;
-        this.cartas = new Carta[this.tamanho];
+        this.tamanho = 52;
+        Carta[] cartas = new Carta[this.tamanho];
 
         int c = 0;
 
         for (ValorCartaEnum valor : ValorCartaEnum.values()) {
             for (NaipeCartaEnum naipe : NaipeCartaEnum.values()) {
-                this.cartas[c++] = new Carta(valor, naipe);
+                cartas[c++] = new Carta(valor, naipe);
             }
         }
+
+        this.setCartas(cartas);
     }
 
     public void embaralhar() {
@@ -67,5 +69,32 @@ public class Baralho {
         return "Baralho{" +
                 "cartas=" + Arrays.toString(cartas) +
                 '}';
+    }
+
+    public Carta[] getCartas() {
+        return cartas;
+    }
+
+    public void setCartas(Carta[] cartas) {
+        if (this.cartas != null) {
+            this.cartas = cartas;
+        } else {
+            int index = 0;
+
+            for (int i = 0; i < this.cartas.length; i++) {
+                if (this.cartas[i] == null) {
+                    this.cartas[i] = cartas[index];
+                    index++;
+                }
+            }
+        }
+    }
+
+    public int getTamanho() {
+        return tamanho;
+    }
+
+    public void setTamanho(int tamanho) {
+        this.tamanho = tamanho;
     }
 }
