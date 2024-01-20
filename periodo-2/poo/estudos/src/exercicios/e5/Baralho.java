@@ -64,13 +64,6 @@ public class Baralho {
         }
     }
 
-    @Override
-    public String toString() {
-        return "Baralho{" +
-                "cartas=" + Arrays.toString(cartas) +
-                '}';
-    }
-
     public Carta[] getCartas() {
         return cartas;
     }
@@ -96,5 +89,12 @@ public class Baralho {
 
     public void setTamanho(int tamanho) {
         this.tamanho = tamanho;
+    }
+
+    @Override
+    public String toString() {
+        return "Baralho{" +
+                "cartas=" + Arrays.toString(cartas) +
+                '}';
     }
 }

@@ -3,12 +3,14 @@ package exercicios.e5;
 public class Jogador {
     private String nome;
     private Carta[] cartas;
+    private CombinacaoTriduEnum combinacaoCartas;
 
-    public Jogador(String nome, Carta[] cartas) {
+    public Jogador(String nome, Carta[] cartas, CombinacaoTriduEnum combinacaoCartas) {
         this.nome = nome;
         this.cartas = cartas;
+        this.combinacaoCartas = combinacaoCartas;
     }
-
+    
     public void receberCartas(Carta[] cartas) {
         this.setCartas(cartas);
     }
@@ -33,5 +35,13 @@ public class Jogador {
 
     public void setCartas(Carta[] cartas) {
         this.cartas = cartas;
+    }
+
+    public CombinacaoTriduEnum getCombinacaoCartas() {
+        return combinacaoCartas;
+    }
+
+    public void setCombinacaoCartas(CombinacaoTriduEnum combinacaoCartas) {
+        this.combinacaoCartas = combinacaoCartas;
     }
 }
