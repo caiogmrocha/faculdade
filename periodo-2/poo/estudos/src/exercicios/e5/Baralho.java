@@ -11,19 +11,12 @@ public class Baralho {
         this.tamanho = 56;
         this.cartas = new Carta[this.tamanho];
 
-        String[] valores = new String[]{"Ás", "Dois", "Três", "Quatro", "Cinco", "Seis", "Sete", "Oito", "Nove", "Dez", "Valete", "Dama", "Rei"};
-        String[] naipes = new String[]{"Copas", "Espadas", "Ouros", "Paus"};
-
         int c = 0;
 
-        for (String valor : valores) {
-            for (String naipe : naipes) {
+        for (ValorCartaEnum valor : ValorCartaEnum.values()) {
+            for (NaipeCartaEnum naipe : NaipeCartaEnum.values()) {
                 this.cartas[c++] = new Carta(valor, naipe);
             }
-        }
-
-        for (String naipe : naipes) {
-            this.cartas[c++] = new Carta("Coringa", naipe);
         }
     }
 

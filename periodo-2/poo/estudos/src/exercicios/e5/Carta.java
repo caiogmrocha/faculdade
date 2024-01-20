@@ -1,34 +1,34 @@
 package exercicios.e5;
 
 public class Carta {
-    private String nome;
-    private String naipe;
+    private ValorCartaEnum valor;
+    private NaipeCartaEnum naipe;
 
-    public Carta(String nome, String naipe) {
-        this.nome = nome;
+    public Carta(ValorCartaEnum valor, NaipeCartaEnum naipe) {
+        this.valor = valor;
         this.naipe = naipe;
     }
 
-    public String getNome() {
-        return nome;
+    public ValorCartaEnum getNome() {
+        return valor;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNome(ValorCartaEnum valor) {
+        this.valor = valor;
     }
 
-    public String getNaipe() {
+    public NaipeCartaEnum getNaipe() {
         return naipe;
     }
 
-    public void setNaipe(String naipe) {
+    public void setNaipe(NaipeCartaEnum naipe) {
         this.naipe = naipe;
     }
 
     @Override
     public String toString() {
         return "Carta{" +
-                "nome='" + nome + '\'' +
+                "valor='" + valor + '\'' +
                 ", naipe='" + naipe + '\'' +
                 '}';
     }
