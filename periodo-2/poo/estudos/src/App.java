@@ -1,9 +1,20 @@
-import aula03.Caneta;
+import exercicios.e5.Baralho;
+import exercicios.e5.Carta;
 
 public class App {
-    public static void main(String[] args) throws Exception {
-        Caneta caneta = new Caneta("BIC", "preta", 0.5, 100, true);
+    public static void main(String[] args) {
+        Baralho baralho = new Baralho();
 
-        caneta.rabiscar();
+        baralho.embaralhar();
+        baralho.embaralhar();
+        baralho.embaralhar();
+        baralho.embaralhar();
+        baralho.embaralhar();
+
+        Carta carta = baralho.darCarta();
+
+        System.out.println(carta);
+
+        // baralho.imprimirBaralho();
     }
 }
