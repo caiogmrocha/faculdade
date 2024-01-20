@@ -74,7 +74,9 @@ public class Baralho {
         } else {
             int index = 0;
 
-            for (int i = 0; i < this.cartas.length; i++) {
+            this.cartas = new Carta[cartas.length];
+
+            for (int i = 0; i < cartas.length; i++) {
                 if (this.cartas[i] == null) {
                     this.cartas[i] = cartas[index];
                     index++;

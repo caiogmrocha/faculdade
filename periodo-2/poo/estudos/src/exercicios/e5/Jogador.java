@@ -10,7 +10,7 @@ public class Jogador {
         this.cartas = cartas;
         this.combinacaoCartas = combinacaoCartas;
     }
-    
+
     public void receberCartas(Carta[] cartas) {
         this.setCartas(cartas);
     }
@@ -43,5 +43,14 @@ public class Jogador {
 
     public void setCombinacaoCartas(CombinacaoTriduEnum combinacaoCartas) {
         this.combinacaoCartas = combinacaoCartas;
+    }
+
+    @Override
+    public String toString() {
+        return "Jogador{" +
+                "nome='" + nome + "'" +
+                ", cartas=" + cartas.toString() +
+                ", combinacaoCartas=" + combinacaoCartas +
+                '}';
     }
 }

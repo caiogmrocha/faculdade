@@ -9,7 +9,7 @@ public class Tridu {
     private Baralho baralho;
     private Jogador vencedor;
 
-    public Tridu(Jogador[] jogadores, Baralho baralho) {
+    public Tridu(List<Jogador> jogadores, Baralho baralho) {
         this.jogadores = new ArrayList<Jogador>();
 
         for (Jogador jogador : jogadores) {
@@ -38,10 +38,32 @@ public class Tridu {
         }
     }
 
+    public void mostrarCartas() {
+        for (Jogador jogador : this.jogadores) {
+            System.out.println(jogador);
+        }
+    }
+
+    public boolean calcularEmpate() {
+        int maior = 0;
+        int quantidade = 0;
+
+        for (Jogador jogador : this.jogadores) {
+            if (jogador.getCombinacaoCartas().getValor() > maior) {
+                maior = jogador.getCombinacaoCartas().getValor();
+                quantidade = 1;
+            } else if (jogador.getCombinacaoCartas().getValor() == maior) {
+                quantidade++;
+            }
+        }
+
+        return quantidade > 1;
+    }
+
     public void calcularResultado() {
         for (Jogador jogador : this.jogadores) {
             Carta[] cartas = jogador.getCartas();
-
+            
             if (cartas[0].getNome().getNumero() == cartas[1].getNome().getNumero() && cartas[1].getNome().getNumero() == cartas[2].getNome().getNumero()) {
                 jogador.setCombinacaoCartas(CombinacaoTriduEnum.TRIO);
             } else if (cartas[0].getNome().getNumero() == cartas[1].getNome().getNumero() || cartas[1].getNome().getNumero() == cartas[2].getNome().getNumero() || cartas[0].getNome().getNumero() == cartas[2].getNome().getNumero()) {
@@ -50,10 +72,15 @@ public class Tridu {
                 jogador.setCombinacaoCartas(CombinacaoTriduEnum.NENHUMA);
             }
         }
+        
+        if (this.calcularEmpate()) {
+            this.setVencedor(null);
+            return;
+        }
 
         Collections.sort(this.jogadores, new ComparadorTridu());
 
-        this.setVencedor(this.jogadores.get(0));
+        this.setVencedor(this.jogadores.get(this.jogadores.size() - 1));
     }
 
     public List<Jogador> getJogadores() {
