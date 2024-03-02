@@ -10,7 +10,7 @@ int main() {
     int array[4] = {4,3,2,1};
 
     printArray(array, 4);
-    bubbleSort(array, 4);
+    insertionSort(array, 4);
     printArray(array, 4);
 
     return 0;
