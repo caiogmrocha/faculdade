@@ -1,8 +1,10 @@
+#include <stdio.h>
+#include "helpers.h"
 #include "sort.h"
 
 void bubbleSort(int *array, int size) {
     if (size == 1) return;
-    
+
     for (int j = 0; j < size-1; j++) {
         for (int i = 0; i < size-1; i++) {
             if (array[i] > array[i+1]) {
@@ -27,5 +29,23 @@ void insertionSort(int *array, int size) {
         }
 
         array[++j] = curr;
+    }
+}
+
+void selectionSort(int *array, int size) {
+    if (size == 1) return;
+
+    for (int i = 0; i < size; i++) {
+        int menor_posicao = i;
+            
+        for (int j = i; j < size; j++) {
+            if (array[j] < array[menor_posicao]) {
+                menor_posicao = j;
+            }
+        }
+
+        int aux = array[i];
+        array[i] = array[menor_posicao];
+        array[menor_posicao] = aux;
     }
 }
