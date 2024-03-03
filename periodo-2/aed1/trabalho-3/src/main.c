@@ -10,7 +10,7 @@ int main() {
     int array[4] = {4,3,2,1};
 
     printArray(array, 4);
-    selectionSort(array, 4);
+    quickSort(array, 0, 3);
     printArray(array, 4);
 
     return 0;

@@ -49,3 +49,25 @@ void selectionSort(int *array, int size) {
         array[menor_posicao] = aux;
     }
 }
+
+void quickSort(int *array, int start, int end) {
+    if (start < end) {
+        int j = start;
+        
+        for (int i = start; i < end; i++) {
+            if (array[i] <= array[end]) {
+                int aux = array[i];
+                array[i] = array[j];
+                array[j] = aux;
+                j++;
+            }
+        }
+
+        int aux = array[j];
+        array[j] = array[end];
+        array[end] = aux;
+
+        quickSort(array, j+1, end);
+        quickSort(array, start, j-1);
+    }
+}
