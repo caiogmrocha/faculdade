@@ -7,107 +7,68 @@
 
 void printArray(int *array, int size);
 
-void bubbleSort(int *array, int size);
-
 int main() {
     srand(time(NULL));
 
-    // 10.000
-    int *completellyRandomArray10000 = generateArray(10000, 0, 'A');
-    int *seventyFivePercentRandomArray10000 = generateArray(10000, 75, 'A');
-    int *fiftyPercentRandomArray10000 = generateArray(10000, 50, 'A');
-    int *completellyAscOrderedArray10000 = generateArray(10000, 100, 'A');
-    int *completellyDescOrderedArray10000 = generateArray(10000, 100, 'D');
+    int arraysAmount[4] = {
+        // 10000,
+        // 50000,
+        // 100000,
+        500000,
+        1000000,
+        10000000,
+        50000000,
+    };
 
-    // 50.000
-    int *completellyRandomArray50000 = generateArray(50000, 0, 'A');
-    int *seventyFivePercentRandomArray50000 = generateArray(50000, 75, 'A');
-    int *fiftyPercentRandomArray50000 = generateArray(50000, 50, 'A');
-    int *completellyAscOrderedArray50000 = generateArray(50000, 100, 'A');
-    int *completellyDescOrderedArray50000 = generateArray(50000, 100, 'D');
+    for (int i = 0; i < 4; i++) {
+        printf("Array size: %i\n", arraysAmount[i]);
 
-    // 100.000
-    int *completellyRandomArray100000 = generateArray(100000, 0, 'A');
-    int *seventyFivePercentRandomArray100000 = generateArray(100000, 75, 'A');
-    int *fiftyPercentRandomArray100000 = generateArray(100000, 50, 'A');
-    int *completellyAscOrderedArray100000 = generateArray(100000, 100, 'A');
-    int *completellyDescOrderedArray100000 = generateArray(100000, 100, 'D');
+        int *completellyRandomArray = generateArray(arraysAmount[i], 0, 'A');
+        printf("Array generated!\n");
+        // printArray(completellyRandomArray, arraysAmount[i]);
+        printMetricsToTxt(
+            measurePerformance(completellyRandomArray,arraysAmount[i]),
+            arraysAmount[i],
+            "completellyRandomArray"
+        );
+        free(completellyRandomArray);
 
-    // 500.000
-    int *completellyRandomArray500000 = generateArray(500000, 0, 'A');
-    int *seventyFivePercentRandomArray500000 = generateArray(500000, 75, 'A');
-    int *fiftyPercentRandomArray500000 = generateArray(500000, 50, 'A');
-    int *completellyAscOrderedArray500000 = generateArray(500000, 100, 'A');
-    int *completellyDescOrderedArray500000 = generateArray(500000, 100, 'D');
+        int *seventyFivePercentRandomArray = generateArray(arraysAmount[i], 75, 'A');
+        printMetricsToTxt(
+            measurePerformance(seventyFivePercentRandomArray,arraysAmount[i]),
+            arraysAmount[i],
+            "seventyFivePercentRandomArray"
+        );
+        free(seventyFivePercentRandomArray);
 
-    // 1.000.000
-    int *completellyRandomArray1000000 = generateArray(1000000, 0, 'A');
-    int *seventyFivePercentRandomArray1000000 = generateArray(1000000, 75, 'A');
-    int *fiftyPercentRandomArray1000000 = generateArray(1000000, 50, 'A');
-    int *completellyAscOrderedArray1000000 = generateArray(1000000, 100, 'A');
-    int *completellyDescOrderedArray1000000 = generateArray(1000000, 100, 'D');
-    
-    // 10.000.000
-    int *completellyRandomArray10000000 = generateArray(10000000, 0, 'A');
-    int *seventyFivePercentRandomArray10000000 = generateArray(10000000, 75, 'A');
-    int *fiftyPercentRandomArray10000000 = generateArray(10000000, 50, 'A');
-    int *completellyAscOrderedArray10000000 = generateArray(10000000, 100, 'A');
-    int *completellyDescOrderedArray10000000 = generateArray(10000000, 100, 'D');
+        int *fiftyPercentRandomArray = generateArray(arraysAmount[i], 50, 'A');
+        printMetricsToTxt(
+            measurePerformance(fiftyPercentRandomArray,arraysAmount[i]),
+            arraysAmount[i],
+            "fiftyPercentRandomArray"
+        );
+        free(fiftyPercentRandomArray);
 
-    // 50.000.000
-    int *completellyRandomArray50000000 = generateArray(50000000, 0, 'A');
-    int *seventyFivePercentRandomArray50000000 = generateArray(50000000, 75, 'A');
-    int *fiftyPercentRandomArray50000000 = generateArray(50000000, 50, 'A');
-    int *completellyAscOrderedArray50000000 = generateArray(50000000, 100, 'A');
-    int *completellyDescOrderedArray50000000 = generateArray(50000000, 100, 'D');
+        int *completellyAscOrderedArray = generateArray(arraysAmount[i], 100, 'A');
+        printMetricsToTxt(
+            measurePerformance(completellyAscOrderedArray,arraysAmount[i]),
+            arraysAmount[i],
+            "completellyAscOrderedArray"
+        );
+        free(completellyAscOrderedArray);
 
-    // printArray(array, 100);
+        int *completellyDescOrderedArray = generateArray(arraysAmount[i], 100, 'D');
+        printMetricsToTxt(
+            measurePerformance(completellyDescOrderedArray,arraysAmount[i]),
+            arraysAmount[i],
+            "completellyDescOrderedArray"
+        );
+        free(completellyDescOrderedArray);
+        
+        printf("Done!\n");
+    }
 
-    // int array[4] = {4,3,2,1};
-    // clock_t t0, tf;
-    // double dt;
-
-    // t0 = clock();
-    // quickSort(array, 0, 3);
-    // tf = clock();
-    // dt = (double) (tf-t0)/CLOCKS_PER_SEC;
-
-    // free
-    free(completellyRandomArray10000);
-    free(seventyFivePercentRandomArray10000);
-    free(fiftyPercentRandomArray10000);
-    free(completellyAscOrderedArray10000);
-    free(completellyDescOrderedArray10000);
-    free(completellyRandomArray50000);
-    free(seventyFivePercentRandomArray50000);
-    free(fiftyPercentRandomArray50000);
-    free(completellyAscOrderedArray50000);
-    free(completellyDescOrderedArray50000);
-    free(completellyRandomArray100000);
-    free(seventyFivePercentRandomArray100000);
-    free(fiftyPercentRandomArray100000);
-    free(completellyAscOrderedArray100000);
-    free(completellyDescOrderedArray100000);
-    free(completellyRandomArray500000);
-    free(seventyFivePercentRandomArray500000);
-    free(fiftyPercentRandomArray500000);
-    free(completellyAscOrderedArray500000);
-    free(completellyDescOrderedArray500000);
-    free(completellyRandomArray1000000);
-    free(seventyFivePercentRandomArray1000000);
-    free(fiftyPercentRandomArray1000000);
-    free(completellyAscOrderedArray1000000);
-    free(completellyDescOrderedArray1000000);
-    free(completellyRandomArray10000000);
-    free(seventyFivePercentRandomArray10000000);
-    free(fiftyPercentRandomArray10000000);
-    free(completellyAscOrderedArray10000000);
-    free(completellyDescOrderedArray10000000);
-    free(completellyRandomArray50000000);
-    free(seventyFivePercentRandomArray50000000);
-    free(fiftyPercentRandomArray50000000);
-    free(completellyAscOrderedArray50000000);
-    free(completellyDescOrderedArray50000000);
+    printf("Done de verdade!\n");
 
     return 0;
 }
