@@ -56,5 +56,3 @@ int *generateArray(int size, int percent, char order) {
 
     return array;
 }
-
-// int *generateRandomArray(int size);

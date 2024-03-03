@@ -3,6 +3,5 @@
 
 void printArray(int *array, int size);
 int *generateArray(int size, int percent, char order);
-int *generateRandomArray(int size);
 
 #endif
