@@ -12,7 +12,7 @@ void bubbleSort(int *array, int size);
 int main() {
     srand(time(NULL));
 
-    int *array = generateOrderedArray(100, 20);
+    int *array = generateArray(100, 0, 'A');
 
     printArray(array, 100);
 

@@ -22,7 +22,7 @@ int randomInteger(int min, int max) {
     return rand() % (max - min + 1) + min;
 }
 
-int *generateOrderedArray(int size, int percent) {
+int *generateArray(int size, int percent, char order) {
     int *array = malloc(size * sizeof(int));
 
     if (array == NULL) {
@@ -30,8 +30,14 @@ int *generateOrderedArray(int size, int percent) {
         exit(1);
     }
 
-    for (int i = 0; i < size; i++) {
-        array[i] = i+1;
+    if (order == 'A') {
+        for (int i = 0; i < size; i++) {
+            array[i] = i+1;
+        }
+    } else {
+        for (int i = 0, j = size; i < size && j > 0; i++, j--) {
+            array[i] = j;
+        }
     }
 
     if (percent != 0) {
