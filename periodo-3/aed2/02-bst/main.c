@@ -23,6 +23,20 @@ void insert(Tree **tree, int value) {
     }
 }
 
+Tree *binarySearch(Tree *tree, int value) {
+    if (tree == NULL) {
+        return NULL;
+    } else {
+        if (value == tree->value) {
+            return tree;
+        } else if (value < tree->value) {
+            return binarySearch(tree->left, value);
+        } else {
+            return binarySearch(tree->right, value);
+        }
+    }
+}
+
 int main() {
     Tree *tree = NULL;
 
@@ -34,6 +48,8 @@ int main() {
     insert(&tree, 3);
     insert(&tree, 1);
     insert(&tree, 15);
+
+    Tree *subtree = binarySearch(tree, 16);
 
     // printf("value: %p\n", tree->left);
 
