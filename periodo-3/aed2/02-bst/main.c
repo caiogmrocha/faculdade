@@ -38,45 +38,27 @@ Tree *binarySearch(Tree *tree, int value) {
 }
 
 void processPreOrder(Tree *tree) {
-    if (tree == NULL) return;
-
-    printf("%i\n", tree->value);
-
-    if (tree->left != NULL) {
+    if (tree != NULL) {
+        printf("%i\n", tree->value);
         processPreOrder(tree->left);
-    }
-
-    if (tree->right != NULL) {
         processPreOrder(tree->right);
     }
 }
 
 void processInOrder(Tree *tree) {
-    if (tree == NULL) return;
-    
-    if (tree->left != NULL) {
+    if (tree != NULL) {
         processInOrder(tree->left);
-    }
-
-    printf("%i\n", tree->value);
-
-    if (tree->right != NULL) {
+        printf("%i\n", tree->value);
         processInOrder(tree->right);
     }
 }
 
 void processPostOrder(Tree *tree) {
-    if (tree == NULL) return;
-    
-    if (tree->left != NULL) {
+    if (tree != NULL) {
         processPostOrder(tree->left);
-    }
-
-    if (tree->right != NULL) {
         processPostOrder(tree->right);
+        printf("%i\n", tree->value);
     }
-
-    printf("%i\n", tree->value);
 }
 
 int main() {
