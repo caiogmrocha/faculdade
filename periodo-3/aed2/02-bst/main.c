@@ -51,8 +51,6 @@ void processPreOrder(Tree *tree) {
     }
 }
 
-
-
 void processInOrder(Tree *tree) {
     if (tree == NULL) return;
     
@@ -65,6 +63,20 @@ void processInOrder(Tree *tree) {
     if (tree->right != NULL) {
         processInOrder(tree->right);
     }
+}
+
+void processPostOrder(Tree *tree) {
+    if (tree == NULL) return;
+    
+    if (tree->left != NULL) {
+        processPostOrder(tree->left);
+    }
+
+    if (tree->right != NULL) {
+        processPostOrder(tree->right);
+    }
+
+    printf("%i\n", tree->value);
 }
 
 int main() {
@@ -81,7 +93,7 @@ int main() {
 
     Tree *subtree = binarySearch(tree, 16);
 
-    processInOrder(tree);
+    processPostOrder(tree);
 
     return 0;
 }
