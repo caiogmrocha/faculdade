@@ -37,6 +37,20 @@ Tree *binarySearch(Tree *tree, int value) {
     }
 }
 
+void processPreOrder(Tree *tree) {
+    if (tree == NULL) return;
+
+    printf("%i\n", tree->value);
+
+    if (tree->left != NULL) {
+        processPreOrder(tree->left);
+    }
+
+    if (tree->right != NULL) {
+        processPreOrder(tree->right);
+    }
+}
+
 int main() {
     Tree *tree = NULL;
 
@@ -51,7 +65,7 @@ int main() {
 
     Tree *subtree = binarySearch(tree, 16);
 
-    // printf("value: %p\n", tree->left);
+    processPreOrder(tree);
 
     return 0;
 }
