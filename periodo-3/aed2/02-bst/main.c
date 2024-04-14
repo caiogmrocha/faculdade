@@ -37,39 +37,47 @@ Tree *binarySearch(Tree *tree, int value) {
     }
 }
 
-void processPreOrder(Tree *tree, void cb(int)) {
+void processPreOrder(Tree *tree, void cb(Tree *tree)) {
     if (tree != NULL) {
-        cb(tree->value);
+        cb(tree);
         processPreOrder(tree->left, cb);
         processPreOrder(tree->right, cb);
     }
 }
 
-void processInOrder(Tree *tree, void cb(int)) {
+void processInOrder(Tree *tree, void cb(Tree *tree)) {
     if (tree != NULL) {
         processInOrder(tree->left, cb);
-        cb(tree->value);
+        cb(tree);
         processInOrder(tree->right, cb);
     }
 }
 
-void processInDescOrder(Tree *tree, void cb(int)) {
+void processInDescOrder(Tree *tree, void cb(Tree *tree)) {
     if (tree != NULL) {
         processInDescOrder(tree->right, cb);
-        cb(tree->value);
+        cb(tree);
         processInDescOrder(tree->left, cb);
     }
 }
 
-void print(int value) {
-    printf("%i\n", value);
+void print(Tree *tree) {
+    printf("%i\n", tree->value);
 }
 
-void processPostOrder(Tree *tree, void cb(int)) {
+void processPostOrder(Tree *tree, void cb(Tree *tree)) {
     if (tree != NULL) {
         processPostOrder(tree->left, cb);
         processPostOrder(tree->right, cb);
-        cb(tree->value);
+        cb(tree);
+    }
+}
+
+void freeTree(Tree **tree) {
+    if (*tree != NULL) {
+        freeTree(&(*tree)->left);
+        freeTree(&(*tree)->right);
+        free(*tree);
     }
 }
 
@@ -88,6 +96,8 @@ int main() {
     Tree *subtree = binarySearch(tree, 16);
 
     processInDescOrder(tree, print);
+
+    freeTree(&tree);
 
     return 0;
 }
