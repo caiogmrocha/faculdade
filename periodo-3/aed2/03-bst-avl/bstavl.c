@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include "bstavl.h"
 
 bst *bstFactory(int value) {
@@ -76,5 +77,25 @@ void bstRemove(bst **tree, int value) {
         bstRemove(&(*tree)->left, value);
     } else if (value > (*tree)->value) {
         bstRemove(&(*tree)->right, value);
+    }
+}
+
+bst *bstRotateLeft(bst **tree, int value) {
+    if (*tree == NULL) {
+        return NULL;
+    } else if (value == (*tree)->value) {
+        bst *a = *tree;
+        bst *b = a->right;
+        bst *c = b->left;
+
+        b->left = a;
+        a->right = c;
+        *tree = b;
+
+        return b;
+    } else if (value < (*tree)->value) {
+        return bstRotateLeft(&(*tree)->left, value);
+    } else {
+        return bstRotateLeft(&(*tree)->right, value);
     }
 }
