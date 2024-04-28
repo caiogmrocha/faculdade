@@ -61,6 +61,16 @@ void bstRemove(bst **tree, int value) {
             bst *temp = *tree;
             *tree = (*tree)->right;
             free(temp);
+        } else {
+            bst *leftMax = (*tree)->left;
+
+            while (leftMax->right != NULL) {
+                leftMax = leftMax->right;
+            }
+
+            (*tree)->value = leftMax->value;
+
+            bstRemove(&(*tree)->left, leftMax->value);
         }
     } else if (value < (*tree)->value) {
         bstRemove(&(*tree)->left, value);
