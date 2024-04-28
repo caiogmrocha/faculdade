@@ -42,6 +42,16 @@ int main() {
                 break;
             }
 
+            case 5: {
+                int value;
+
+                scanf("%i", &value);
+
+                bstRemove(&tree, value);
+
+                break;
+            }
+
             case -1: {
                 exit(1);
             }

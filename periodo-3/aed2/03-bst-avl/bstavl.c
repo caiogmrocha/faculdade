@@ -45,6 +45,18 @@ void bstPostOrder(bst *tree, void cb(bst *node)) {
     }
 }
 
-// preorder - RED
-// inorder - ERD
-// postorder - EDR
+void bstRemove(bst **tree, int value) {
+    if (*tree == NULL) {
+        return;
+    } else if (value == (*tree)->value) {
+        if ((*tree)->left == NULL && (*tree)->right == NULL) {
+            bst *temp = (*tree);
+            *tree = NULL;
+            free(temp);
+        }
+    } else if (value < (*tree)->value) {
+        bstRemove(&(*tree)->left, value);
+    } else if (value > (*tree)->value) {
+        bstRemove(&(*tree)->right, value);
+    }
+}
