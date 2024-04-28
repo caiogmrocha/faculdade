@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include "bstavl.h"
 
+void printNode(bst *tree) {
+    printf("[%i]", tree->value);
+}
+
 int main() {
     int option;
     bst *tree = NULL;
@@ -17,6 +21,12 @@ int main() {
 
                 bstInsert(&tree, bstFactory(value));
 
+                break;
+            }
+
+            case 2: {
+                bstPreOrder(tree, printNode);
+                printf("\n");
                 break;
             }
 

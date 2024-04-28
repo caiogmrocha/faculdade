@@ -20,3 +20,15 @@ void bstInsert(bst **dest, bst *source) {
         bstInsert(&(*dest)->right, source);
     }
 }
+
+void bstPreOrder(bst *tree, void cb(bst *node)) {
+    if (tree != NULL) {
+        cb(tree);
+        bstPreOrder(tree->left, cb);
+        bstPreOrder(tree->right, cb);
+    }
+}
+
+// preorder - RED
+// inorder - ERD
+// postorder - EDR
