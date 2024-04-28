@@ -30,6 +30,12 @@ int main() {
                 break;
             }
 
+            case 3: {
+                bstInOrder(tree, printNode);
+                printf("\n");
+                break;
+            }
+
             case -1: {
                 exit(1);
             }
