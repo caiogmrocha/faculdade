@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "linkedlist.h"
+    #include "linkedlist.h"
 
 void addFirst(struct LinkedListNode **list, void *value) {
     if (*list == NULL) {
@@ -48,6 +48,13 @@ struct LinkedListNode *removeLast(struct LinkedListNode **list) {
 
     struct LinkedListNode *iterator = *list;
 
+    // If the list only contains one node
+    if (iterator->next == NULL) {
+        *list = NULL;
+        return iterator;
+    }
+
+    // Find the second last node
     while (iterator->next->next != NULL) {
         iterator = iterator->next;
     }

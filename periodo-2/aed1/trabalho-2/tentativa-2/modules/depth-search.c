@@ -15,6 +15,16 @@ int hasNonVisitedVertices(struct Vertex *vertex) {
     return 0;
 }
 
+int hasAllVerticesVisited(struct Vertex *vertex) {
+    for (int i = 0; i < vertex->edgesAmount; i++) {
+        if (!vertex->edgesArray[i]->visited) {
+            return 0;
+        }
+    }
+
+    return 1;
+}
+
 void depthSearch(struct Graph *graph, int startVertexId, int endVertexId, struct LinkedListNode **pathStack) {
     struct Vertex *currentVertex = peekNodeById(graph, startVertexId);
 
@@ -22,6 +32,23 @@ void depthSearch(struct Graph *graph, int startVertexId, int endVertexId, struct
 
     if (*pathStack == NULL) {
         push(pathStack, currentVertex);
+    }
+
+    if (hasAllVerticesVisited(currentVertex) && currentVertex->id != endVertexId) {
+        struct LinkedListNode *previousPathStackNode = pop(pathStack);
+
+        printf("(x,y) = (%d,%d)\n", ((struct Vertex *) previousPathStackNode->value)->x, ((struct Vertex *) previousPathStackNode->value)->y);
+
+        if (previousPathStackNode == NULL) {
+            printf("Labirinto sem solução\n");
+            return;
+        }
+
+        struct Vertex *previousVertex = (struct Vertex *) (previousPathStackNode->value);
+
+        depthSearch(graph, previousVertex->id, endVertexId, pathStack);
+
+        // free(previousPathStackNode);
     }
 
     for (int i = 0; i < currentVertex->edgesAmount; i++) {
@@ -37,15 +64,4 @@ void depthSearch(struct Graph *graph, int startVertexId, int endVertexId, struct
             depthSearch(graph, currentVertex->edgesArray[i]->id, endVertexId, pathStack);
         }
     }
-
-    // if (currentVertex != NULL && hasNonVisitedVertices(currentVertex)) {
-    //     struct LinkedListNode *previousPathStackNode = pop(pathStack);
-    //     struct Vertex *previousVertex = (struct Vertex *) (previousPathStackNode->value);
-
-    //     depthSearch(graph, previousVertex->id, endVertexId, pathStack);
-
-    //     // free(previousPathStackNode);
-    // }
-
-    // printf("Labirinto sem solução\n");
 }

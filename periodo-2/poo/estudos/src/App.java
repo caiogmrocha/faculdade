@@ -26,6 +26,11 @@ public class App {
 
         tridu.mostrarCartas();
 
-        System.out.println("Vencedor: " + tridu.getVencedor() == null ? "Nenhum" : tridu.getVencedor().getNome());
+        if (tridu.getVencedor() == null) {
+            System.out.println("Vencedor: Nenhum");
+        } else {
+            System.out.println("Vencedor: " + tridu.getVencedor().getNome());
+        }
+
     }
 }

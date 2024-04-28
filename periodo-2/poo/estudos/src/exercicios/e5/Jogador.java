@@ -47,10 +47,20 @@ public class Jogador {
 
     @Override
     public String toString() {
-        return "Jogador{" +
+
+        System.out.println(cartas);
+
+        String retorno = "Jogador{" +
                 "nome='" + nome + "'" +
-                ", cartas=" + cartas.toString() +
-                ", combinacaoCartas=" + combinacaoCartas +
+                ", cartas=";
+
+        for (Carta carta : cartas) {
+            retorno += carta.toString() + ", ";
+        }
+
+        retorno += ", combinacaoCartas=" + combinacaoCartas +
                 '}';
+
+        return retorno;
     }
 }

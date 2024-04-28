@@ -22,30 +22,30 @@ void printArray(int *array, int size) {
 void printMetrics(Metrics metrics) {
     printf("Bubble Sort\n");
     printf("Execution Time: %f\n", metrics.bubbleSort.executionTime);
-    printf("Iterations: %i\n", metrics.bubbleSort.iterations);
-    printf("Permutations: %i\n", metrics.bubbleSort.permutations);
-    printf("Comparisons: %i\n", metrics.bubbleSort.comparisons);
+    printf("Iterations: %li\n", metrics.bubbleSort.iterations);
+    printf("Permutations: %li\n", metrics.bubbleSort.permutations);
+    printf("Comparisons: %li\n", metrics.bubbleSort.comparisons);
     printf("\n");
 
     printf("Insertion Sort\n");
     printf("Execution Time: %f\n", metrics.insertionSort.executionTime);
-    printf("Iterations: %i\n", metrics.insertionSort.iterations);
-    printf("Permutations: %i\n", metrics.insertionSort.permutations);
-    printf("Comparisons: %i\n", metrics.insertionSort.comparisons);
+    printf("Iterations: %li\n", metrics.insertionSort.iterations);
+    printf("Permutations: %li\n", metrics.insertionSort.permutations);
+    printf("Comparisons: %li\n", metrics.insertionSort.comparisons);
     printf("\n");
 
     printf("Selection Sort\n");
     printf("Execution Time: %f\n", metrics.selectionSort.executionTime);
-    printf("Iterations: %i\n", metrics.selectionSort.iterations);
-    printf("Permutations: %i\n", metrics.selectionSort.permutations);
-    printf("Comparisons: %i\n", metrics.selectionSort.comparisons);
+    printf("Iterations: %li\n", metrics.selectionSort.iterations);
+    printf("Permutations: %li\n", metrics.selectionSort.permutations);
+    printf("Comparisons: %li\n", metrics.selectionSort.comparisons);
     printf("\n");
 
     printf("Quick Sort\n");
     printf("Execution Time: %f\n", metrics.quickSort.executionTime);
-    printf("Iterations: %i\n", metrics.quickSort.iterations);
-    printf("Permutations: %i\n", metrics.quickSort.permutations);
-    printf("Comparisons: %i\n", metrics.quickSort.comparisons);
+    printf("Iterations: %li\n", metrics.quickSort.iterations);
+    printf("Permutations: %li\n", metrics.quickSort.permutations);
+    printf("Comparisons: %li\n", metrics.quickSort.comparisons);
     printf("\n");
 }
 
@@ -61,47 +61,50 @@ void printMetricsToTxt(Metrics metrics, int size, char *arrayName) {
     
     fprintf(file, "## Bubble Sort\n");
     fprintf(file, "- Execution Time: %f\n", metrics.bubbleSort.executionTime);
-    fprintf(file, "- Iterations: %i\n", metrics.bubbleSort.iterations);
-    fprintf(file, "- Permutations: %i\n", metrics.bubbleSort.permutations);
-    fprintf(file, "- Comparisons: %i\n", metrics.bubbleSort.comparisons);
+    fprintf(file, "- Iterations: %li\n", metrics.bubbleSort.iterations);
+    fprintf(file, "- Permutations: %li\n", metrics.bubbleSort.permutations);
+    fprintf(file, "- Comparisons: %li\n", metrics.bubbleSort.comparisons);
     fprintf(file, "\n");
 
     fprintf(file, "## Insertion Sort\n");
     fprintf(file, "- Execution Time: %f\n", metrics.insertionSort.executionTime);
-    fprintf(file, "- Iterations: %i\n", metrics.insertionSort.iterations);
-    fprintf(file, "- Permutations: %i\n", metrics.insertionSort.permutations);
-    fprintf(file, "- Comparisons: %i\n", metrics.insertionSort.comparisons);
+    fprintf(file, "- Iterations: %li\n", metrics.insertionSort.iterations);
+    fprintf(file, "- Permutations: %li\n", metrics.insertionSort.permutations);
+    fprintf(file, "- Comparisons: %li\n", metrics.insertionSort.comparisons);
     fprintf(file, "\n");
 
     fprintf(file, "## Selection Sort\n");
     fprintf(file, "- Execution Time: %f\n", metrics.selectionSort.executionTime);
-    fprintf(file, "- Iterations: %i\n", metrics.selectionSort.iterations);
-    fprintf(file, "- Permutations: %i\n", metrics.selectionSort.permutations);
-    fprintf(file, "- Comparisons: %i\n", metrics.selectionSort.comparisons);
+    fprintf(file, "- Iterations: %li\n", metrics.selectionSort.iterations);
+    fprintf(file, "- Permutations: %li\n", metrics.selectionSort.permutations);
+    fprintf(file, "- Comparisons: %li\n", metrics.selectionSort.comparisons);
     fprintf(file, "\n");
 
     fprintf(file, "## Quick Sort\n");
     fprintf(file, "- Execution Time: %f\n", metrics.quickSort.executionTime);
-    fprintf(file, "- Iterations: %i\n", metrics.quickSort.iterations);
-    fprintf(file, "- Permutations: %i\n", metrics.quickSort.permutations);
-    fprintf(file, "- Comparisons: %i\n", metrics.quickSort.comparisons);
+    fprintf(file, "- Iterations: %li\n", metrics.quickSort.iterations);
+    fprintf(file, "- Permutations: %li\n", metrics.quickSort.permutations);
+    fprintf(file, "- Comparisons: %li\n", metrics.quickSort.comparisons);
     fprintf(file, "\n");
 
     fclose(file);
 }
 
-void printMetricsToLatex(Metrics metrics, int size) {
-    printf("\\begin{tikzpicture}\n");
-    printf("\\begin{axis}[\n");
-    printf("xbar,\n");
-    printf("]\n");
-    printf("\\addplot[bblue,style={fill=bblue}] coordinates {(%f,%i)};\n", metrics.bubbleSort.executionTime, size);
-    printf("\\addplot[rred,style={fill=rred}] coordinates {(%f,%i)};\n", metrics.insertionSort.executionTime, size);
-    printf("\\addplot[ggreen,style={fill=ggreen}] coordinates {(%f,%i)};\n", metrics.selectionSort.executionTime, size);
-    printf("\\addplot[ppurple,style={fill=ppurple}] coordinates {(%f,%i)};\n", metrics.quickSort.executionTime, size);
-    printf("\\legend {Bubble Sort,Insertion Sort,Selection Sort,Quick Sort}\n");
-    printf("\\end{axis}\n");
-    printf("\\end{tikzpicture}\n");
+void printMetricsToCsv(Metrics metrics, int size, char *arrayName) {
+    FILE *file = fopen("metrics.csv", "a");
+
+    if (file == NULL) {
+        printf("Error opening file!\n");
+        exit(1);
+    }
+
+    // Array Name, Size, Algorithm, Execution Time, Iterations, Permutations, Comparisons
+    fprintf(file, "%s,%i,%s,%f,%li,%li,%li\n", arrayName, size, "BubbleSort", metrics.bubbleSort.executionTime, metrics.bubbleSort.iterations, metrics.bubbleSort.permutations, metrics.bubbleSort.comparisons);
+    fprintf(file, "%s,%i,%s,%f,%li,%li,%li\n", arrayName, size, "InsertionSort", metrics.insertionSort.executionTime, metrics.insertionSort.iterations, metrics.insertionSort.permutations, metrics.insertionSort.comparisons);
+    fprintf(file, "%s,%i,%s,%f,%li,%li,%li\n", arrayName, size, "SelectionSort", metrics.selectionSort.executionTime, metrics.selectionSort.iterations, metrics.selectionSort.permutations, metrics.selectionSort.comparisons);
+    fprintf(file, "%s,%i,%s,%f,%li,%li,%li\n", arrayName, size, "QuickSort", metrics.quickSort.executionTime, metrics.quickSort.iterations, metrics.quickSort.permutations, metrics.quickSort.comparisons);
+
+    fclose(file);
 }
 
 Metrics measurePerformance(int *array, int size) {

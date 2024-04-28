@@ -93,7 +93,7 @@ int main(int argc, char *argv[]) {
 
     // printf("Caminho: ");
 
-    struct LinkedListNode *pathStackIterator  = pathStack;
+    struct LinkedListNode *pathStackIterator = pathStack;
 
     // while (pathStackIterator != NULL) {
     //     printf("%d ", ((struct Vertex *) pathStackIterator->value)->id);

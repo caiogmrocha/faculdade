@@ -3,9 +3,9 @@
 
 typedef struct {
     double executionTime;
-    int iterations;
-    int permutations;
-    int comparisons;
+    long int iterations;
+    long int permutations;
+    long int comparisons;
 } MetricsData;
 
 typedef struct {
@@ -18,7 +18,7 @@ typedef struct {
 void printArray(int *array, int size);
 void printMetrics(Metrics metrics);
 void printMetricsToTxt(Metrics metrics, int size, char *arrayName);
-void printMetricsToLatex(Metrics metrics, int size);
+void printMetricsToCsv(Metrics metrics, int size, char *arrayName);
 Metrics measurePerformance(int *array, int size);
 int *generateArray(int size, int percent, char order);
 
