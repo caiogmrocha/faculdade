@@ -50,8 +50,12 @@ void bstRemove(bst **tree, int value) {
         return;
     } else if (value == (*tree)->value) {
         if ((*tree)->left == NULL && (*tree)->right == NULL) {
-            bst *temp = (*tree);
+            bst *temp = *tree;
             *tree = NULL;
+            free(temp);
+        } else if ((*tree)->left != NULL && (*tree)->right == NULL) {
+            bst *temp = *tree;
+            *tree = (*tree)->left;
             free(temp);
         }
     } else if (value < (*tree)->value) {
