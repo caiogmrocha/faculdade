@@ -37,6 +37,14 @@ void bstInOrder(bst *tree, void cb(bst *node)) {
     }
 }
 
+void bstPostOrder(bst *tree, void cb(bst *node)) {
+    if (tree != NULL) {
+        bstPostOrder(tree->left, cb);
+        bstPostOrder(tree->right, cb);
+        cb(tree);
+    }
+}
+
 // preorder - RED
 // inorder - ERD
 // postorder - EDR

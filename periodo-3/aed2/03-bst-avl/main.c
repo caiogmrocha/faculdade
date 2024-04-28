@@ -36,6 +36,12 @@ int main() {
                 break;
             }
 
+            case 4: {
+                bstPostOrder(tree, printNode);
+                printf("\n");
+                break;
+            }
+
             case -1: {
                 exit(1);
             }
