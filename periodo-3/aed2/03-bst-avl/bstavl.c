@@ -99,3 +99,23 @@ bst *bstRotateLeft(bst **tree, int value) {
         return bstRotateLeft(&(*tree)->right, value);
     }
 }
+
+bst *bstRotateRight(bst **tree, int value) {
+    if (*tree == NULL) {
+        return NULL;
+    } else if (value == (*tree)->value) {
+        bst *a = *tree;
+        bst *b = a->left;
+        bst *c = b->right;
+
+        b->right = a;
+        a->left = c;
+        *tree = b;
+
+        return b;
+    } else if (value < (*tree)->value) {
+        return bstRotateRight(&(*tree)->left, value);
+    } else {
+        return bstRotateRight(&(*tree)->right, value);
+    }
+}

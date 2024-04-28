@@ -13,7 +13,7 @@ void bstInOrder(bst *tree, void cb(bst *node));
 void bstPostOrder(bst *tree, void cb(bst *node));
 void bstRemove(bst **tree, int value);
 bst *bstRotateLeft(bst **tree, int value);
-// void bstRotateRight(bst **tree);
+bst *bstRotateRight(bst **tree, int value);
 // void bstRotateLeftRight(bst **tree);
 // void bstRotateRightLeft(bst **tree);
 
