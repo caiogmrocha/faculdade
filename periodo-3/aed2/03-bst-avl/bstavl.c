@@ -57,6 +57,10 @@ void bstRemove(bst **tree, int value) {
             bst *temp = *tree;
             *tree = (*tree)->left;
             free(temp);
+        } else if ((*tree)->left == NULL && (*tree)->right != NULL) {
+            bst *temp = *tree;
+            *tree = (*tree)->right;
+            free(temp);
         }
     } else if (value < (*tree)->value) {
         bstRemove(&(*tree)->left, value);
