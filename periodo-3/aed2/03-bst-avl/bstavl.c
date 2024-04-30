@@ -80,9 +80,9 @@ void bstRemove(bst **tree, int value) {
     }
 }
 
-bst *bstRotateLeft(bst **tree, int value) {
+void bstRotateLeft(bst **tree, int value) {
     if (*tree == NULL) {
-        return NULL;
+        return;
     } else if (value == (*tree)->value) {
         bst *a = *tree;
         bst *b = a->right;
@@ -91,18 +91,16 @@ bst *bstRotateLeft(bst **tree, int value) {
         b->left = a;
         a->right = c;
         *tree = b;
-
-        return b;
     } else if (value < (*tree)->value) {
-        return bstRotateLeft(&(*tree)->left, value);
+        bstRotateLeft(&(*tree)->left, value);
     } else {
-        return bstRotateLeft(&(*tree)->right, value);
+        bstRotateLeft(&(*tree)->right, value);
     }
 }
 
-bst *bstRotateRight(bst **tree, int value) {
+void bstRotateRight(bst **tree, int value) {
     if (*tree == NULL) {
-        return NULL;
+        return;
     } else if (value == (*tree)->value) {
         bst *a = *tree;
         bst *b = a->left;
@@ -111,11 +109,22 @@ bst *bstRotateRight(bst **tree, int value) {
         b->right = a;
         a->left = c;
         *tree = b;
-
-        return b;
     } else if (value < (*tree)->value) {
-        return bstRotateRight(&(*tree)->left, value);
+        bstRotateRight(&(*tree)->left, value);
     } else {
-        return bstRotateRight(&(*tree)->right, value);
+        bstRotateRight(&(*tree)->right, value);
+    }
+}
+
+void bstRotateRightLeft(bst **tree, int value) {
+    if (*tree == NULL) {
+        return;
+    } else if (value == (*tree)->value) {
+        bstRotateRight(&(*tree)->right, (*tree)->right->value);
+        bstRotateLeft(tree, value);
+    } else if (value < (*tree)->value) {
+        bstRotateRightLeft(&(*tree)->left, value);
+    } else {
+        bstRotateRightLeft(&(*tree)->right, value);
     }
 }
