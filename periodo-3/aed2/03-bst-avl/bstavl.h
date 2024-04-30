@@ -15,6 +15,6 @@ void bstRemove(bst **tree, int value);
 void bstRotateLeft(bst **tree, int value);
 void bstRotateRight(bst **tree, int value);
 void bstRotateRightLeft(bst **tree, int value);
-// void bstRotateLeftRight(bst **tree, int value);
+void bstRotateLeftRight(bst **tree, int value);
 
 #endif

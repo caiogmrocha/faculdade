@@ -82,6 +82,16 @@ int main() {
                 break;
             }
 
+            case 9: {
+                int value;
+
+                scanf("%i", &value);
+
+                bstRotateLeftRight(&tree, value);
+                
+                break;
+            }
+
             case -1: {
                 exit(1);
             }

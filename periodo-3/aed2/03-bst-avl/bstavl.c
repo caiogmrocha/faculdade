@@ -128,3 +128,16 @@ void bstRotateRightLeft(bst **tree, int value) {
         bstRotateRightLeft(&(*tree)->right, value);
     }
 }
+
+void bstRotateLeftRight(bst **tree, int value) {
+    if (*tree == NULL) {
+        return;
+    } else if (value == (*tree)->value) {
+        bstRotateLeft(&(*tree)->left, (*tree)->left->value);
+        bstRotateRight(tree, value);
+    } else if (value < (*tree)->value) {
+        bstRotateLeftRight(&(*tree)->left, value);
+    } else {
+        bstRotateLeftRight(&(*tree)->right, value);
+    }
+}
