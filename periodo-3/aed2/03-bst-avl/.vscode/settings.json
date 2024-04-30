@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        ".sequelizerc": "javascript",
+        ".stylelintrc": "json",
+        "*.tsx": "typescriptreact",
+        ".env.*": "dotenv",
+        ".prettierrc": "json",
+        ".env.test.example": "dotenv",
+        "bstavl.h": "c"
+    }
+}
