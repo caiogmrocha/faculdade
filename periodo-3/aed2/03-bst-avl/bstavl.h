@@ -2,7 +2,7 @@
 #define BSTAVL_H
 
 typedef struct bst {
-    int value;
+    int value, height;
     struct bst *left, *right;
 } bst;
 

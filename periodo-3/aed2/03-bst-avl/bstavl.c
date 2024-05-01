@@ -20,6 +20,8 @@ void bstInsert(bst **dest, bst *source) {
     } else {
         bstInsert(&(*dest)->right, source);
     }
+
+    (*dest)->height = bstHeight(*dest);
 }
 
 void bstPreOrder(bst *tree, void cb(bst *node)) {
@@ -78,6 +80,8 @@ void bstRemove(bst **tree, int value) {
     } else if (value > (*tree)->value) {
         bstRemove(&(*tree)->right, value);
     }
+
+    (*tree)->height = bstHeight(*tree);
 }
 
 void bstRotateLeft(bst **tree, int value) {
