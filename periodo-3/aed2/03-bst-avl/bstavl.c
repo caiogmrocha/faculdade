@@ -158,3 +158,7 @@ int bstHeight(bst *tree) {
         return 1 + (leftHeight > rightHeight ? leftHeight : rightHeight);
     }
 }
+
+int bstBalanceFactor(bst *left, bst *right) {
+    return left->height - right->height;
+}
