@@ -147,7 +147,10 @@ int bstHeight(bst *tree) {
         return -1;
     } else if (tree->left == NULL && tree->right == NULL) {
         return 0;
-    }
+    } else {
+        int leftHeight = bstHeight(tree->left);
+        int rightHeight = bstHeight(tree->right);
 
-    return 1;
+        return 1 + (leftHeight > rightHeight ? leftHeight : rightHeight);
+    }
 }
