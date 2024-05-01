@@ -141,3 +141,11 @@ void bstRotateLeftRight(bst **tree, int value) {
         bstRotateLeftRight(&(*tree)->right, value);
     }
 }
+
+int bstHeight(bst *tree) {
+    if (tree == NULL) {
+        return -1;
+    }
+
+    return 0;
+}

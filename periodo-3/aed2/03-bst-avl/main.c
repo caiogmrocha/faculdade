@@ -92,6 +92,12 @@ int main() {
                 break;
             }
 
+            case 10: {
+                printf("%d\n", bstHeight(tree));
+
+                break;
+            }
+
             case -1: {
                 exit(1);
             }
