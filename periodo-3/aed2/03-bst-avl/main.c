@@ -57,7 +57,7 @@ int main() {
 
                 scanf("%i", &value);
 
-                bstRotateLeft(&tree, value);
+                bstRotateLeft(bstSearch(&tree, value));
                 
                 break;
             }
@@ -67,7 +67,7 @@ int main() {
 
                 scanf("%i", &value);
 
-                bstRotateRight(&tree, value);
+                bstRotateRight(bstSearch(&tree, value));
                 
                 break;
             }
@@ -77,7 +77,7 @@ int main() {
 
                 scanf("%i", &value);
 
-                bstRotateRightLeft(&tree, value);
+                bstRotateRightLeft(bstSearch(&tree, value));
                 
                 break;
             }
@@ -86,8 +86,8 @@ int main() {
                 int value;
 
                 scanf("%i", &value);
-
-                bstRotateLeftRight(&tree, value);
+                
+                bstRotateLeftRight(bstSearch(&tree, value));
                 
                 break;
             }

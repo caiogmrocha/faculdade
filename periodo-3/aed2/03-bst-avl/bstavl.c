@@ -81,13 +81,15 @@ void bstRemove(bst **tree, int value) {
         bstRemove(&(*tree)->right, value);
     }
 
-    (*tree)->height = bstHeight(*tree);
+    if (*tree != NULL) {
+        (*tree)->height = bstHeight(*tree);
+    }
 }
 
-void bstRotateLeft(bst **tree, int value) {
+void bstRotateLeft(bst **tree) {
     if (*tree == NULL) {
         return;
-    } else if (value == (*tree)->value) {
+    } else {
         bst *a = *tree;
         bst *b = a->right;
         bst *c = b->left;
@@ -95,17 +97,13 @@ void bstRotateLeft(bst **tree, int value) {
         b->left = a;
         a->right = c;
         *tree = b;
-    } else if (value < (*tree)->value) {
-        bstRotateLeft(&(*tree)->left, value);
-    } else {
-        bstRotateLeft(&(*tree)->right, value);
     }
 }
 
-void bstRotateRight(bst **tree, int value) {
+void bstRotateRight(bst **tree) {
     if (*tree == NULL) {
         return;
-    } else if (value == (*tree)->value) {
+    } else {
         bst *a = *tree;
         bst *b = a->left;
         bst *c = b->right;
@@ -113,37 +111,17 @@ void bstRotateRight(bst **tree, int value) {
         b->right = a;
         a->left = c;
         *tree = b;
-    } else if (value < (*tree)->value) {
-        bstRotateRight(&(*tree)->left, value);
-    } else {
-        bstRotateRight(&(*tree)->right, value);
     }
 }
 
-void bstRotateRightLeft(bst **tree, int value) {
-    if (*tree == NULL) {
-        return;
-    } else if (value == (*tree)->value) {
-        bstRotateRight(&(*tree)->right, (*tree)->right->value);
-        bstRotateLeft(tree, value);
-    } else if (value < (*tree)->value) {
-        bstRotateRightLeft(&(*tree)->left, value);
-    } else {
-        bstRotateRightLeft(&(*tree)->right, value);
-    }
+void bstRotateRightLeft(bst **tree) {
+    bstRotateRight(&(*tree)->right);
+    bstRotateLeft(tree);
 }
 
-void bstRotateLeftRight(bst **tree, int value) {
-    if (*tree == NULL) {
-        return;
-    } else if (value == (*tree)->value) {
-        bstRotateLeft(&(*tree)->left, (*tree)->left->value);
-        bstRotateRight(tree, value);
-    } else if (value < (*tree)->value) {
-        bstRotateLeftRight(&(*tree)->left, value);
-    } else {
-        bstRotateLeftRight(&(*tree)->right, value);
-    }
+void bstRotateLeftRight(bst **tree) {
+    bstRotateLeft(&(*tree)->left);
+    bstRotateRight(tree);
 }
 
 int bstHeight(bst *tree) {
@@ -161,4 +139,16 @@ int bstHeight(bst *tree) {
 
 int bstBalanceFactor(bst *left, bst *right) {
     return left->height - right->height;
+}
+
+bst **bstSearch(bst **tree, int value) {
+    if (*tree == NULL) {
+        return NULL;
+    } else if (value == (*tree)->value) {
+        return tree;
+    } else if (value > (*tree)->value) {
+        return bstSearch(&(*tree)->right, value);
+    } else {
+        return bstSearch(&(*tree)->left, value);
+    }
 }
