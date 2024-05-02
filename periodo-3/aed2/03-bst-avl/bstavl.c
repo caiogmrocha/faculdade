@@ -86,6 +86,8 @@ void bstRemove(bst **tree, int value) {
     if (*tree != NULL) {
         (*tree)->height = bstHeight(*tree);
     }
+
+    bstBalance(tree);
 }
 
 void bstRotateLeft(bst **tree) {
