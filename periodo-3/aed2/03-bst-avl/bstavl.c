@@ -22,6 +22,8 @@ void bstInsert(bst **dest, bst *source) {
     }
 
     (*dest)->height = bstHeight(*dest);
+
+    bstBalance(dest);
 }
 
 void bstPreOrder(bst *tree, void cb(bst *node)) {
@@ -137,8 +139,16 @@ int bstHeight(bst *tree) {
     }
 }
 
-int bstBalanceFactor(bst *left, bst *right) {
-    return left->height - right->height;
+int bstBalanceFactor(bst **tree) {
+    if (*tree == NULL || ((*tree)->left == NULL && (*tree)->right == NULL)) {
+        return 0;
+    } else if ((*tree)->left == NULL && (*tree)->right != NULL) {
+        return 0 - (*tree)->right->height;
+    } else if ((*tree)->left != NULL && (*tree)->right == NULL) {
+        return (*tree)->left->height - 0;
+    } else {
+        return (*tree)->left->height - (*tree)->right->height;
+    }
 }
 
 bst **bstSearch(bst **tree, int value) {
@@ -150,5 +160,23 @@ bst **bstSearch(bst **tree, int value) {
         return bstSearch(&(*tree)->right, value);
     } else {
         return bstSearch(&(*tree)->left, value);
+    }
+}
+
+void bstBalance(bst **tree) {
+    if (*tree == NULL) {
+        return;
+    }
+
+    int balanceFactor = bstBalanceFactor(tree);
+
+    if (balanceFactor <= -1 && bstBalanceFactor(&(*tree)->right) >= 1) {
+        bstRotateRightLeft(tree);
+    } else if (balanceFactor >= 1 && bstBalanceFactor(&(*tree)->left) <= -1) {
+        bstRotateLeftRight(tree);
+    } else if (balanceFactor <= -1) {
+        bstRotateLeft(tree);
+    } else if (balanceFactor >= 1) {
+        bstRotateRight(tree);
     }
 }

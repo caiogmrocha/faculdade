@@ -18,7 +18,7 @@ void bstRotateRight(bst **tree);
 void bstRotateRightLeft(bst **tree);
 void bstRotateLeftRight(bst **tree);
 int bstHeight(bst *tree);
-int bstBalanceFactor(bst *left, bst *right);
-// TODO: void bstBalance(bst **tree);
+int bstBalanceFactor(bst **tree);
+void bstBalance(bst **tree);
 
 #endif
