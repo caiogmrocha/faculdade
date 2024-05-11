@@ -6,6 +6,7 @@
         ".env.*": "dotenv",
         ".prettierrc": "json",
         ".env.test.example": "dotenv",
-        "bstavl.h": "c"
+        "bstavl.h": "c",
+        "type_traits": "c"
     }
 }

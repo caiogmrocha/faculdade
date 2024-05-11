@@ -2,8 +2,8 @@ gcc bstavl.c main.c -o main -g -Wall -Werror
 
 # create an loop to test the output of the program in directory ./tests
 
-while :
-do
+# while :
+# do
     for file in ./tests/*; do
         if [ -f "$file" ]; then
             if [[ $file != *.out.txt ]]; then
@@ -24,5 +24,5 @@ do
 
     sleep .5
 
-    clear
-done
+    # clear
+# done
