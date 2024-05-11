@@ -1,4 +1,4 @@
-gcc bstavl.c main.c -o main -g -Wall -Werror
+gcc ttf-tree.c main.c -o main -g -Wall -Werror
 
 # create an loop to test the output of the program in directory ./tests
 
