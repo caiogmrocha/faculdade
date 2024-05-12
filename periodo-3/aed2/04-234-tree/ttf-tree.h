@@ -12,8 +12,23 @@ typedef struct ttf {
     struct ttf *children[TTF_CHILDREN_AMOUNT];
 } ttf;
 
+/**
+ * Generate a 234 tree with default values.
+ * 
+ * @return a new pointer of `ttf`.
+*/
 ttf *ttfFactory();
+
+/**
+ * Insert a `value` in `(*source)->values` with insertion sort algorithm.
+ * 
+ * @param source the double pointer to the 234 tree.
+ * @param value the `value` to be inserted.
+ * 
+ * @return `true` if the element has been insert or `false` otherwise.
+*/
 bool ttfAppendValue(ttf **source, unsigned int value);
-bool ttfAppendChild(ttf **dest, ttf *source);
+
+// bool ttfAppendChild(ttf **dest, ttf *source);
 
 #endif

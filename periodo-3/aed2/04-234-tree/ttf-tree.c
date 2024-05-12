@@ -23,9 +23,7 @@ bool ttfAppendValue(ttf **source, unsigned int value) {
     
     for (int i = 0; i < TTF_VALUES_AMOUNT; i++) {
         if ((*source)->values[i] != -1) {
-            if (value > (*source)->values[i]) {
-                continue;
-            } else {
+            if (value < (*source)->values[i]) {
                 for (int j = TTF_VALUES_AMOUNT-1; j > i; j--) {
                     (*source)->values[j] = (*source)->values[j-1];
                 }
