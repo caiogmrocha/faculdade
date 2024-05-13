@@ -64,3 +64,13 @@ bool ttfIsLeaf(ttf *tree) {
 
     return true;
 }
+
+bool ttfValuesIsEmpty(ttf *tree) {
+    for (int i = 0; i < TTF_NULL_VALUE; i++) {
+        if (tree->values[i] != -1) {
+            return false;
+        }
+    }
+
+    return true;
+}
