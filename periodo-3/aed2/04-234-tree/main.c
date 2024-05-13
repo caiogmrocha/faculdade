@@ -26,6 +26,10 @@ int main() {
                 printf("\n");
             } break;
 
+            case 3: {
+                tree->
+            } break;
+
             case -1: {
                 exit(EXIT_SUCCESS);
             }

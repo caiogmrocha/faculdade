@@ -41,3 +41,15 @@ bool ttfAppendValue(ttf **source, unsigned int value) {
 
     return true;
 }
+
+bool ttfAppendChild(ttf **dest, ttf *source) {
+    for (int i = 0; i < TTF_CHILDREN_AMOUNT; i++) {
+        if ((*dest)->children[i] == NULL) {
+            (*dest)->children[i] = source;
+
+            return true;
+        }
+    }
+
+     return false;
+}
