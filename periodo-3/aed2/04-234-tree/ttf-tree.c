@@ -53,3 +53,14 @@ bool ttfAppendChild(ttf **dest, ttf *source) {
 
      return false;
 }
+
+
+bool ttfIsLeaf(ttf *tree) {
+    for (int i = TTF_CHILDREN_AMOUNT - 1; i > -1; i--) {
+        if (tree->children[i] != NULL) {
+            return false;
+        }
+    }
+
+    return true;
+}
