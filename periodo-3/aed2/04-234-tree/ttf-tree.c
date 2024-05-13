@@ -54,23 +54,10 @@ bool ttfAppendChild(ttf **dest, ttf *source) {
      return false;
 }
 
-
 bool ttfIsLeaf(ttf *tree) {
-    for (int i = TTF_CHILDREN_AMOUNT - 1; i > -1; i--) {
-        if (tree->children[i] != NULL) {
-            return false;
-        }
-    }
-
-    return true;
+    return tree->children[0] == NULL;
 }
 
 bool ttfValuesIsEmpty(ttf *tree) {
-    for (int i = 0; i < TTF_NULL_VALUE; i++) {
-        if (tree->values[i] != -1) {
-            return false;
-        }
-    }
-
-    return true;
+    return tree->values[0] == TTF_NULL_VALUE;
 }
