@@ -61,3 +61,7 @@ bool ttfIsLeaf(ttf *tree) {
 bool ttfValuesIsEmpty(ttf *tree) {
     return tree->values[0] == TTF_NULL_VALUE;
 }
+
+bool ttfValuesIsFulfilled(ttf *tree) {
+    return tree->values[TTF_VALUES_AMOUNT - 1] != -1;
+}
