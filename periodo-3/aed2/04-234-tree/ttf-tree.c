@@ -69,3 +69,7 @@ bool ttfValuesIsFulfilled(ttf *tree) {
 bool ttfPointersIsEmpty(ttf *tree) {
     return tree->children[0] == NULL;
 }
+
+bool ttfPointersIsFulfilled(ttf *tree) {
+    return tree->children[TTF_CHILDREN_AMOUNT - 1] != NULL;
+}
