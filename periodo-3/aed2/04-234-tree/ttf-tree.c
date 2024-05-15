@@ -16,6 +16,32 @@ ttf *ttfFactory() {
     return newTtf;
 }
 
+void ttfInsert(ttf **tree, unsigned int value, ttf **parent) {
+    if (*tree == NULL) {
+        *tree = ttfFactory();
+
+        ttfAppendValue(tree, value);
+    } else if (!ttfValuesIsFulfilled(*tree)) {
+        ttfAppendValue(tree, value);
+    } else if (parent == NULL) {
+        *parent = ttfFactory();
+        ttf *right = ttfFactory();
+
+        ttfAppendValue(parent, (*tree)->values[1]);
+        (*tree)->values[1] = TTF_NULL_VALUE;
+
+        ttfAppendValue(&right, (*tree)->values[2]);
+        (*tree)->values[2] = TTF_NULL_VALUE;
+
+        (*parent)->children[0] = *tree;
+        (*parent)->children[1] = right;
+
+        *tree = *parent;
+    } else {
+        // ...
+    }
+}
+
 bool ttfAppendValue(ttf **source, unsigned int value) {
     if ((*source)->values[TTF_VALUES_AMOUNT - 1] != TTF_NULL_VALUE) {
         return false;

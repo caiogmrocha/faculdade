@@ -20,6 +20,11 @@ typedef struct ttf {
 ttf *ttfFactory();
 
 /**
+ * 
+*/
+void ttfInsert(ttf **tree, unsigned int value, ttf **parent);
+
+/**
  * Insert a `value` in `(*source)->values` with insertion sort algorithm.
  * 
  * @param source that is the double pointer to the 234 tree.

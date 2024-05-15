@@ -26,6 +26,14 @@ int main() {
                 printf("\n");
             } break;
 
+            case 3: {
+                unsigned int value;
+
+                scanf("%i", &value);
+
+                ttfInsert(&tree, value, NULL);
+            } break;
+
             case -1: {
                 exit(EXIT_SUCCESS);
             }
