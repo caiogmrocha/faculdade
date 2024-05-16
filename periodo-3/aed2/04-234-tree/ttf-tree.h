@@ -10,6 +10,7 @@
 typedef struct ttf {
     unsigned int values[TTF_VALUES_AMOUNT];
     struct ttf *children[TTF_CHILDREN_AMOUNT];
+    struct ttf *parent;
 } ttf;
 
 /**
@@ -22,7 +23,7 @@ ttf *ttfFactory();
 /**
  * 
 */
-void ttfInsert(ttf **tree, unsigned int value, ttf **parent);
+void ttfInsert(ttf **tree, unsigned int value);
 
 /**
  * Insert a `value` in `(*source)->values` with insertion sort algorithm.
@@ -78,7 +79,7 @@ bool ttfValuesIsFulfilled(ttf *tree);
  * 
  * @returns `true` if the children list of `tree` is empty or `false` otherwise.
 */
-bool ttfPointersIsEmpty(ttf *tree);
+bool ttfChildrenIsEmpty(ttf *tree);
 
 /**
  * Check if the `tree` children list is fulfilled.
@@ -87,6 +88,6 @@ bool ttfPointersIsEmpty(ttf *tree);
  * 
  * @returns `true` if the values list of `tree` is empty or `false` otherwise.
 */
-bool ttfPointersIsFulfilled(ttf *tree);
+bool ttfChildrenIsFulfilled(ttf *tree);
 
 #endif

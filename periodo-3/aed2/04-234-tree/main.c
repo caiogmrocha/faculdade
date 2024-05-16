@@ -31,7 +31,7 @@ int main() {
 
                 scanf("%i", &value);
 
-                ttfInsert(&tree, value, NULL);
+                ttfInsert(&tree, value);
             } break;
 
             case -1: {
