@@ -1,8 +1,11 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include "rb-tree.h"
 
 int main() {
-    printf("Hello world!\n");
+    rbtree *tree = NULL;
+
+    printf("Hello world!\n=");
 
     return EXIT_SUCCESS;
 }
