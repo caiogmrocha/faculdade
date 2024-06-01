@@ -1,11 +1,13 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "rb-tree.h"
+#include "modules/rbt/rbt.h"
 
-int main() {
-    rbtree *tree = NULL;
+int main () {
+    rbt *tree = NULL;
 
-    printf("Hello world!\n=");
+    rbtInsert(&tree, 10, NULL);
+    rbtInsert(&tree, 5, NULL);
+    rbtInsert(&tree, 15, NULL);
 
-    return EXIT_SUCCESS;
+    return 0;
 }
