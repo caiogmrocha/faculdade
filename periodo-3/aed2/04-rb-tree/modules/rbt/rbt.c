@@ -124,14 +124,23 @@ void rbtInsertBalance(rbt **tree, rbt **root) {
             // (*a)->parent = *b;
             // (*a)->color = RED;
         } else {
-            // left rotation
-            // (*b)->left = *a;
-            // (*b)->parent = NULL;
-            // (*b)->color = BLACK;
+            b->left = a;
+            b->parent = a->parent;
+            b->color = BLACK;
 
-            // (*a)->right = NULL;
-            // (*a)->parent = *b;
-            // (*a)->color = RED;
+            if (a->parent != NULL) {
+                if (rbtIsLeftChild(a)) {
+                    a->parent->left = b;
+                } else {
+                    a->parent->right = b;
+                }
+            } else {
+                *root = b;
+            }
+
+            a->right = NULL;
+            a->parent = b;
+            a->color = RED;
         }
     } else {
         rbtRepaint(tree);
