@@ -138,6 +138,38 @@ void rbtRotateLeftRight(rbt **tree, rbt **root) {
     a->color = RED;
 }
 
+void rbtRotateRightLeft(rbt **tree, rbt **root) {
+    rbt *a = (*tree)->parent->parent;
+    rbt *b = (*tree)->parent;
+    rbt *c = (*tree);
+
+    // left rotation
+    c->right = b;
+    c->parent = b->parent;
+    b->parent = c;
+    b->left = NULL;
+    a->right = c;
+
+    // right rotation
+    c->left = a;
+    c->parent = a->parent;
+    c->color = BLACK;
+
+    if (a->parent != NULL) {
+        if (rbtIsLeftChild(a)) {
+            a->parent->left = c;
+        } else {
+            a->parent->right = c;
+        }
+    } else {
+        *root = c;
+    }
+
+    a->right = NULL;
+    a->parent = c;
+    a->color = RED;
+}
+
 void rbtInsertBalance(rbt **tree, rbt **root) {
     if (*tree == NULL) {
         return;
@@ -159,19 +191,7 @@ void rbtInsertBalance(rbt **tree, rbt **root) {
         } else if (rbtIsLeftChild((*tree)->parent) && rbtIsRightChild(*tree)) {
             rbtRotateLeftRight(tree, root);
         } else if (rbtIsRightChild((*tree)->parent) && rbtIsLeftChild(*tree)) {
-            // right rotation            
-            // (*c)->right = *b;
-            // (*c)->parent = *a;
-            // *b = *c;
-
-            // // left rotation
-            // (*b)->left = *a;
-            // (*b)->parent = NULL;
-            // (*b)->color = BLACK;
-
-            // (*a)->right = NULL;
-            // (*a)->parent = *b;
-            // (*a)->color = RED;
+            rbtRotateRightLeft(tree, root);
         } else {
             rbtRotateLeft(tree, root);
         }
