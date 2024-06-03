@@ -52,7 +52,7 @@ void rbtRepaint(rbt **tree) {
     rbtRepaint(&(*tree)->parent);
 }
 
-void rbtInsertBalance(rbt **tree) {
+void rbtInsertBalance(rbt **tree, rbt **root) {
     if (*tree == NULL) {
         return;
     }
@@ -70,33 +70,43 @@ void rbtInsertBalance(rbt **tree) {
 
         if (rbtIsLeftChild((*tree)->parent) && rbtIsLeftChild(*tree)) {
             // right rotation
-            // (*b)->right = *a;
-            // (*b)->parent = NULL;
-            // (*b)->color = BLACK;
+            b->right = a;
+            b->parent = a->parent;
+            b->color = BLACK;
 
-            // (*a)->left = NULL;
-            // (*a)->parent = *b;
-            // (*a)->color = RED;
-        } else if (rbtIsLeftChild((*tree)->parent) && rbtIsRightChild(*tree)) {
-            // left rotation            
-            c->left = b;
-            c->parent = a;
-
-            b->right = NULL;
-            b->parent = c;
-
-            a->left = c;
-
-            // right rotation
-            c->right = a;
-            c->parent = NULL;
-            c->color = BLACK;
+            if (a->parent != NULL) {
+                if (rbtIsLeftChild(a)) {
+                    a->parent->left = b;
+                } else {
+                    a->parent->right = b;
+                }
+            } else {
+                *root = b;
+            }
 
             a->left = NULL;
             a->parent = b;
             a->color = RED;
+        } else if (rbtIsLeftChild((*tree)->parent) && rbtIsRightChild(*tree)) {
+            // left rotation            
+            // c->left = b;
+            // c->parent = a;
 
-            a = c;
+            // b->right = NULL;
+            // b->parent = c;
+
+            // a->left = c;
+
+            // // right rotation
+            // c->right = a;
+            // c->parent = NULL;
+            // c->color = BLACK;
+
+            // a->left = NULL;
+            // a->parent = b;
+            // a->color = RED;
+
+            // a = c;
 
             // (*tree)->parent->parent = b;
         } else if (rbtIsRightChild((*tree)->parent) && rbtIsLeftChild(*tree)) {
@@ -128,7 +138,7 @@ void rbtInsertBalance(rbt **tree) {
     }
 }
 
-void rbtInsert(rbt **tree, int value, rbt **parent) {
+void rbtInsert(rbt **tree, int value, rbt **parent, rbt **root) {
     if (*tree == NULL) {
         *tree = (rbt *) malloc(sizeof(rbt));
 
@@ -138,10 +148,10 @@ void rbtInsert(rbt **tree, int value, rbt **parent) {
         (*tree)->right = NULL;
         (*tree)->color = parent == NULL ? BLACK : RED;
         
-        rbtInsertBalance(tree);
+        rbtInsertBalance(tree, root);
     } else if (value < (*tree)->value) {
-        rbtInsert(&(*tree)->left, value, tree);
+        rbtInsert(&(*tree)->left, value, tree, root == NULL ? tree : root);
     } else {
-        rbtInsert(&(*tree)->right, value, tree);
+        rbtInsert(&(*tree)->right, value, tree, root == NULL ? tree : root);
     }
 }

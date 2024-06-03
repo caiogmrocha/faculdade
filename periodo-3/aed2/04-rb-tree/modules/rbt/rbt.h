@@ -9,6 +9,6 @@ typedef struct rbt {
     colors color;
 } rbt;
 
-void rbtInsert(rbt **tree, int value, rbt **parent);
+void rbtInsert(rbt **tree, int value, rbt **parent, rbt **root);
 
 #endif
