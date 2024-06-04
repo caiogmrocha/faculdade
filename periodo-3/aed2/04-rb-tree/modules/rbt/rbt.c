@@ -171,21 +171,13 @@ void rbtRotateRightLeft(rbt **tree, rbt **root) {
 }
 
 void rbtInsertBalance(rbt **tree, rbt **root) {
-    if (*tree == NULL) {
+    if (*tree == NULL || (*tree)->parent == NULL || (*tree)->parent->color == BLACK) {
         return;
     }
-
-    if ((*tree)->parent == NULL || (*tree)->parent->color == BLACK) {
-        return;
-    }
-
+    
     rbt *uncle = rbtGetUncle(tree);
 
     if (uncle == NULL || uncle->color == BLACK) {
-        rbt *a = (*tree)->parent->parent;
-        rbt *b = (*tree)->parent;
-        rbt *c = (*tree);
-
         if (rbtIsLeftChild((*tree)->parent) && rbtIsLeftChild(*tree)) {
             rbtRotateRight(tree, root);
         } else if (rbtIsLeftChild((*tree)->parent) && rbtIsRightChild(*tree)) {
