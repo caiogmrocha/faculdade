@@ -12,5 +12,7 @@ int main () {
     rbtInsert(&tree, 30, NULL, NULL);
     rbtInsert(&tree, 40, NULL, NULL);
 
+    rbtRemove(&tree, 40, NULL);
+
     return 0;
 }

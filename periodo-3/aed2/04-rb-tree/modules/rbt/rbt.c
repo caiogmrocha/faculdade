@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include <stdbool.h>
 #include "rbt.h"
 
@@ -207,5 +208,49 @@ void rbtInsert(rbt **tree, int value, rbt **parent, rbt **root) {
         rbtInsert(&(*tree)->left, value, tree, root == NULL ? tree : root);
     } else {
         rbtInsert(&(*tree)->right, value, tree, root == NULL ? tree : root);
+    }
+}
+
+rbt* rbtGetRightMostNode(rbt **tree) {
+    if (*tree == NULL) {
+        return NULL;
+    }
+
+    rbt *iterator = *tree;
+
+    while (iterator->right != NULL) {
+        iterator = iterator->right;
+    }
+
+    return iterator;
+}
+
+void rbtRemove(rbt **tree, int value, rbt **root) {
+    if (*tree == NULL) {
+        return;
+    }
+
+    if (value == (*tree)->value) {
+        if ((*tree)->color == RED) {
+            if ((*tree)->left == NULL && (*tree)->right == NULL) {
+                rbt *temp = (*tree);
+
+                *tree = NULL;
+
+                free(temp);
+            } else {
+                rbt *rightMostNodeFromLeftSubTree = rbtGetRightMostNode(&(*tree)->left);
+
+                (*tree)->value = rightMostNodeFromLeftSubTree->value;
+
+                rbtRemove(&(*tree)->left, rightMostNodeFromLeftSubTree->value, root);
+            }
+        } else {
+            printf("not implemented case");
+        }
+    } else if (value < (*tree)->value) {
+        rbtRemove(&(*tree)->left, value, root);
+    } else {
+        rbtRemove(&(*tree)->right, value, root);
     }
 }

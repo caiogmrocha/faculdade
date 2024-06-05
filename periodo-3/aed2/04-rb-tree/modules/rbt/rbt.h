@@ -10,5 +10,6 @@ typedef struct rbt {
 } rbt;
 
 void rbtInsert(rbt **tree, int value, rbt **parent, rbt **root);
+void rbtRemove(rbt **tree, int value, rbt **root);
 
 #endif
