@@ -41,6 +41,10 @@ void rbtRepaint(rbt **tree) {
 
         return;
     }
+
+    if ((*tree)->parent->parent != NULL) {
+        (*tree)->parent->parent->color = RED;
+    }
     
     (*tree)->parent->color = BLACK;
 
@@ -50,7 +54,7 @@ void rbtRepaint(rbt **tree) {
         uncle->color = BLACK;
     }
     
-    rbtRepaint(&(*tree)->parent);
+    rbtRepaint(&(*tree)->parent->parent);
 }
 
 void rbtRotateLeft(rbt **tree, rbt **root) {
