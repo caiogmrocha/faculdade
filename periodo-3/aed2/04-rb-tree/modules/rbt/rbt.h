@@ -9,7 +9,7 @@ typedef struct rbt {
     colors color;
 } rbt;
 
-void rbtInsert(rbt **tree, int value, rbt **parent, rbt **root);
+void rbtInsert(rbt **tree, int value);
 void rbtRemove(rbt **tree, int value, rbt **root);
 
 #endif

@@ -155,7 +155,7 @@ void rbtInsertBalance(rbt **tree, rbt **root) {
     }
 }
 
-void rbtInsert(rbt **tree, int value, rbt **parent, rbt **root) {
+void rbtInsertDef(rbt **tree, int value, rbt **parent, rbt **root) {
     if (*tree == NULL) {
         *tree = (rbt *) malloc(sizeof(rbt));
 
@@ -167,10 +167,14 @@ void rbtInsert(rbt **tree, int value, rbt **parent, rbt **root) {
         
         rbtInsertBalance(tree, root);
     } else if (value < (*tree)->value) {
-        rbtInsert(&(*tree)->left, value, tree, root == NULL ? tree : root);
+        rbtInsertDef(&(*tree)->left, value, tree, root == NULL ? tree : root);
     } else {
-        rbtInsert(&(*tree)->right, value, tree, root == NULL ? tree : root);
+        rbtInsertDef(&(*tree)->right, value, tree, root == NULL ? tree : root);
     }
+}
+
+void rbtInsert(rbt **tree, int value) {
+    rbtInsertDef(tree, value, NULL, NULL);
 }
 
 rbt* rbtGetRightMostNode(rbt **tree) {
