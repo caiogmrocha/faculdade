@@ -57,36 +57,6 @@ void rbtRepaint(rbt **tree) {
     rbtRepaint(&(*tree)->parent->parent);
 }
 
-// void rbtRotateLeft(rbt **tree, rbt **root) {
-//     rbt *a = (*tree)->parent->parent;
-//     rbt *b = (*tree)->parent;
-//     rbt *c = (*tree);
-
-//     b->left = a;
-//     b->parent = a->parent;
-//     b->color = BLACK;
-
-//     if (a->parent != NULL) {
-//         if (rbtIsLeftChild(a)) {
-//             a->parent->left = b;
-//         } else {
-//             a->parent->right = b;
-//         }
-//     } else {
-//         *root = b;
-//     }
-
-//     a->right = b->left;
-
-//     if (b->left != NULL) {
-//         b->left->parent = a;
-//     }
-
-//     a->right = NULL;
-//     a->parent = b;
-//     a->color = RED;
-// }
-
 void rbtRotateLeft(rbt **tree, rbt **root) {
     if (*tree != NULL) {
         rbt *d = *tree;
@@ -101,8 +71,12 @@ void rbtRotateLeft(rbt **tree, rbt **root) {
         b->left = d;
         b->parent = d->parent;
 
-        if (d->parent != NULL) {
-            d->parent->right = b;
+        if (b->parent != NULL) {
+            if (rbtIsLeftChild(d)) {
+                b->parent->left = b;
+            } else {
+                b->parent->right = b;
+            }
         } else {
             *root = b;
         }
@@ -125,78 +99,18 @@ void rbtRotateRight(rbt **tree, rbt **root) {
         b->right = d;
         b->parent = d->parent;
 
-        if (d->parent != NULL) {
-            d->parent->left = b;
+        if (b->parent != NULL) {
+            if (rbtIsLeftChild(d)) {
+                b->parent->left = b;
+            } else {
+                b->parent->right = b;
+            }
         } else {
             *root = b;
         }
 
         d->parent = b;
     }
-}
-
-void rbtRotateLeftRight(rbt **tree, rbt **root) {
-    rbt *a = (*tree)->parent->parent;
-    rbt *b = (*tree)->parent;
-    rbt *c = (*tree);
-
-    // left rotation
-    c->left = b;
-    c->parent = b->parent;
-    b->parent = c;
-    b->right = NULL;
-    a->left = c;
-
-    // right rotation
-    c->right = a;
-    c->parent = a->parent;
-    c->color = BLACK;
-
-    if (a->parent != NULL) {
-        if (rbtIsLeftChild(a)) {
-            a->parent->left = c;
-        } else {
-            a->parent->right = c;
-        }
-    } else {
-        *root = c;
-    }
-
-    a->left = NULL;
-    a->parent = c;
-    a->color = RED;
-}
-
-void rbtRotateRightLeft(rbt **tree, rbt **root) {
-    rbt *a = (*tree)->parent->parent;
-    rbt *b = (*tree)->parent;
-    rbt *c = (*tree);
-
-    // left rotation
-    c->right = b;
-    c->parent = b->parent;
-    b->parent = c;
-    b->left = NULL;
-    a->right = c;
-
-    // right rotation
-    c->left = a;
-    c->parent = a->parent;
-    c->color = BLACK;
-
-    if (a->parent != NULL) {
-        if (rbtIsLeftChild(a)) {
-            a->parent->left = c;
-        } else {
-            a->parent->right = c;
-        }
-    } else {
-        *root = c;
-    }
-
-    a->right = NULL;
-    a->parent = c;
-    a->color = RED;
 }
 
 void rbtInsertBalance(rbt **tree, rbt **root) {
@@ -213,11 +127,25 @@ void rbtInsertBalance(rbt **tree, rbt **root) {
             (*tree)->parent->color = BLACK;
             (*tree)->parent->right->color = RED;
         } else if (rbtIsLeftChild((*tree)->parent) && rbtIsRightChild(*tree)) {
-            rbtRotateLeftRight(tree, root);
+            rbt *parent = (*tree)->parent;
+            rbt *grandparent = (*tree)->parent->parent;
+            
+            rbtRotateLeft(&parent, root);
+            rbtRotateRight(&grandparent, root);
+
+            grandparent->color = RED;
+            grandparent->parent->color = BLACK;
         } else if (rbtIsRightChild((*tree)->parent) && rbtIsLeftChild(*tree)) {
-            rbtRotateRightLeft(tree, root);
+            rbt *parent = (*tree)->parent;
+            rbt *grandparent = (*tree)->parent->parent;
+            
+            rbtRotateRight(&parent, root);
+            rbtRotateLeft(&grandparent, root);
+
+            grandparent->color = RED;
+            grandparent->parent->color = BLACK;
         } else {
-            rbtRotateLeft(tree, root);
+            rbtRotateLeft(&(*tree)->parent->parent, root);
 
             (*tree)->parent->color = BLACK;
             (*tree)->parent->left->color = RED;

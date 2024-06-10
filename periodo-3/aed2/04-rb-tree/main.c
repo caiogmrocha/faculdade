@@ -9,7 +9,9 @@ int main () {
     rbtInsert(&tree, 30, NULL, NULL);
     rbtInsert(&tree, 20, NULL, NULL);
     rbtInsert(&tree, 15, NULL, NULL);
-    rbtInsert(&tree, 10, NULL, NULL);
+    rbtInsert(&tree, 17, NULL, NULL);
+    rbtInsert(&tree, 35, NULL, NULL);
+    rbtInsert(&tree, 32, NULL, NULL);
 
     // rbtRemove(&tree, 40, NULL);
 
