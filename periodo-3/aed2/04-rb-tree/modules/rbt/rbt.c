@@ -3,6 +3,18 @@
 #include <stdbool.h>
 #include "rbt.h"
 
+rbt *DB_NULL;
+
+void rbtBootstrap() {
+    DB_NULL = (rbt *) malloc(sizeof(rbt));
+
+    DB_NULL->parent = NULL;
+    DB_NULL->left = NULL;
+    DB_NULL->right = NULL;
+    DB_NULL->value = -1;
+    DB_NULL->color = DOUBLE_BLACK;
+}
+
 bool rbtIsLeftChild(rbt *tree) {
     if (tree == NULL) {
         return false;
@@ -192,26 +204,41 @@ rbt* rbtGetRightMostNode(rbt **tree) {
 }
 
 void rbtRemove(rbt **tree, int value, rbt **root) {
-    if (*tree == NULL) {
+    if (*tree != NULL) {
         return;
     }
 
     if (value == (*tree)->value) {
-        if ((*tree)->color == RED) {
-            if ((*tree)->left == NULL && (*tree)->right == NULL) {
-                rbt *temp = (*tree);
+        if ((*tree)->left != NULL && (*tree)->right != NULL) {
+            rbt *rightMostNodeFromLeftSubTree = rbtGetRightMostNode(&(*tree)->left);
 
-                *tree = NULL;
+            (*tree)->value = rightMostNodeFromLeftSubTree->value;
 
-                free(temp);
-            } else {
-                rbt *rightMostNodeFromLeftSubTree = rbtGetRightMostNode(&(*tree)->left);
+            rbtRemove(&(*tree)->left, rightMostNodeFromLeftSubTree->value, root);
+        } else if ((*tree)->left != NULL && (*tree)->right == NULL) {
+            rbt *temp = *tree;
 
-                (*tree)->value = rightMostNodeFromLeftSubTree->value;
+            (*tree)->left->parent = (*tree)->parent;
+            *tree = (*tree)->left;
+            (*tree)->color = BLACK;
 
-                rbtRemove(&(*tree)->left, rightMostNodeFromLeftSubTree->value, root);
-            }
+            free(temp);
+        } else if ((*tree)->left == NULL && (*tree)->right != NULL) {
+            rbt *temp = *tree;
+
+            (*tree)->right->parent = (*tree)->parent;
+            *tree = (*tree)->right;
+            (*tree)->color = BLACK;
+
+            free(temp);
+        } else if ((*tree)->color == RED) {
+            rbt *temp = (*tree);
+
+            *tree = NULL;
+
+            free(temp);
         } else {
+            // double-black cases
             printf("not implemented case");
         }
     } else if (value < (*tree)->value) {

@@ -3,6 +3,8 @@
 #include "modules/rbt/rbt.h"
 
 int main () {
+    rbtBootstrap();
+
     rbt *tree = NULL;
 
     rbtInsert(&tree, 25);
