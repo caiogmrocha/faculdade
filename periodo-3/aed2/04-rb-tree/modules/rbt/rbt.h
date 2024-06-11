@@ -14,7 +14,13 @@ typedef struct rbt {
 extern rbt *DB_NULL;
 
 void rbtBootstrap();
+void rbtFreeNode(rbt **tree);
+
 void rbtInsert(rbt **tree, int value);
 void rbtRemove(rbt **tree, int value, rbt **root);
+
+void rbtPreOrderTraversal(rbt **tree, void cb(rbt **tree));
+void rbtInOrderTraversal(rbt **tree, void cb(rbt **tree));
+void rbtPostOrderTraversal(rbt **tree, void cb(rbt **tree));
 
 #endif

@@ -17,5 +17,7 @@ int main () {
 
     // rbtRemove(&tree, 40, NULL);
 
+    rbtPostOrderTraversal(&tree, rbtFreeNode);
+
     return 0;
 }

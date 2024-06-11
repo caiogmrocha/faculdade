@@ -15,6 +15,13 @@ void rbtBootstrap() {
     DB_NULL->color = DOUBLE_BLACK;
 }
 
+void rbtFreeNode(rbt **tree) {
+    if (*tree != NULL) {
+        free(*tree);
+        *tree = NULL;
+    }
+}
+
 bool rbtIsLeftChild(rbt *tree) {
     if (tree == NULL) {
         return false;
@@ -245,5 +252,29 @@ void rbtRemove(rbt **tree, int value, rbt **root) {
         rbtRemove(&(*tree)->left, value, root);
     } else {
         rbtRemove(&(*tree)->right, value, root);
+    }
+}
+
+void rbtPreOrderTraversal(rbt **tree, void cb(rbt **tree)) {
+    if (*tree != NULL) {
+        cb(tree);
+        rbtPreOrderTraversal(&(*tree)->left, cb);
+        rbtPreOrderTraversal(&(*tree)->right, cb);
+    }
+}
+
+void rbtInOrderTraversal(rbt **tree, void cb(rbt **tree)) {
+    if (*tree != NULL) {
+        rbtInOrderTraversal(&(*tree)->left, cb);
+        cb(tree);
+        rbtInOrderTraversal(&(*tree)->right, cb);
+    }
+}
+
+void rbtPostOrderTraversal(rbt **tree, void cb(rbt **tree)) {
+    if (*tree != NULL) {
+        rbtPostOrderTraversal(&(*tree)->left, cb);
+        rbtPostOrderTraversal(&(*tree)->right, cb);
+        cb(tree);
     }
 }
