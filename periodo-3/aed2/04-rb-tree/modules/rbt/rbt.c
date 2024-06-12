@@ -374,7 +374,7 @@ void rbtRemoveFixup(rbt **tree, rbt **root) {
         node->parent->right->color = RED;
 
         if (node == DB_NULL) {
-            node = NULL;
+            *tree = NULL;
         } else {
             node->color = BLACK;
         }
@@ -385,7 +385,7 @@ void rbtRemoveFixup(rbt **tree, rbt **root) {
         node->parent->left->color = RED;
         
         if (node == DB_NULL) {
-            node = NULL;
+            *tree = NULL;
         } else {
             node->color = BLACK;
         }
@@ -396,7 +396,7 @@ void rbtRemoveFixup(rbt **tree, rbt **root) {
         node->parent->right->color = RED;
 
         if (node == DB_NULL) {
-            node = NULL;
+            *tree = NULL;
         } else {
             node->color = BLACK;
         }
@@ -405,7 +405,7 @@ void rbtRemoveFixup(rbt **tree, rbt **root) {
         node->parent->left->color = RED;
 
         if (node == DB_NULL) {
-            node = NULL;
+            *tree = NULL;
         } else {
             node->color = BLACK;
         }
@@ -423,16 +423,27 @@ void rbtRemoveFixup(rbt **tree, rbt **root) {
         rbtRemoveFixup(tree, root);
     } else if (rbtRemoveFixupSixthCaseCheck(node)) {
         rbtRotateLeft(&node->parent, root);
-        node->color = BLACK;
         node->parent->parent->color = node->parent->color;
         node->parent->color = BLACK;
         node->parent->parent->right->color = BLACK;
+
+        if (node == DB_NULL) {
+            *tree = NULL;
+        } else {
+            node->color = BLACK;
+        }
     } else if (rbtRemoveFixupSixthMirrorImageCaseCheck(node)) {
         rbtRotateRight(&node->parent, root);
         node->color = BLACK;
         node->parent->parent->color = node->parent->color;
         node->parent->color = BLACK;
         node->parent->parent->left->color = BLACK;
+
+        if (node == DB_NULL) {
+            *tree = NULL;
+        } else {
+            node->color = BLACK;
+        }
     } else {
         fprintf(stderr, "Caso não implementado para o rbtRemoveFixup()\n");
         exit(1);
