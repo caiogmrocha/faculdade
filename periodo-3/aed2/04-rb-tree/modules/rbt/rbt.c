@@ -132,7 +132,7 @@ void rbtRotateRight(rbt **tree, rbt **root) {
     }
 }
 
-void rbtInsertBalance(rbt **tree, rbt **root) {
+void rbtInsertFixup(rbt **tree, rbt **root) {
     if (*tree == NULL || (*tree)->parent == NULL || (*tree)->parent->color == BLACK) {
         return;
     }
@@ -184,7 +184,7 @@ void rbtInsertDef(rbt **tree, int value, rbt **parent, rbt **root) {
         (*tree)->right = NULL;
         (*tree)->color = parent == NULL ? BLACK : RED;
         
-        rbtInsertBalance(tree, root);
+        rbtInsertFixup(tree, root);
     } else if (value < (*tree)->value) {
         rbtInsertDef(&(*tree)->left, value, tree, root == NULL ? tree : root);
     } else {
@@ -210,8 +210,22 @@ rbt* rbtGetRightMostNode(rbt **tree) {
     return iterator;
 }
 
+void rbtRemoveFixup(rbt **tree) {
+    if (*tree == NULL) {
+        return;
+    }
+
+    if ((*tree)->parent == NULL) { // case 1
+        if (*tree == DB_NULL) {
+            *tree == NULL;
+        } else {
+            (*tree)->color = BLACK;
+        }
+    }
+}
+
 void rbtRemove(rbt **tree, int value, rbt **root) {
-    if (*tree != NULL) {
+    if (*tree == NULL) {
         return;
     }
 
@@ -245,8 +259,21 @@ void rbtRemove(rbt **tree, int value, rbt **root) {
 
             free(temp);
         } else {
-            // double-black cases
-            printf("not implemented case");
+            rbt *temp = *tree;
+
+            DB_NULL->parent = (*tree)->parent;
+
+            if (rbtIsLeftChild(*tree)) {
+                DB_NULL->parent->left = DB_NULL;
+            } else {
+                DB_NULL->parent->right = DB_NULL;
+            }
+
+            *tree = DB_NULL;
+
+            rbtRemoveFixup(tree);
+
+            free(temp);
         }
     } else if (value < (*tree)->value) {
         rbtRemove(&(*tree)->left, value, root);
