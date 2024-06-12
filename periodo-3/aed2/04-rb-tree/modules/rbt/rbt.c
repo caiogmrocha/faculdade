@@ -294,6 +294,32 @@ bool rbtRemoveFixupFourthMirrorImageCaseCheck(rbt *tree) {
     );
 }
 
+bool rbtRemoveFixupFifthCaseCheck(rbt *tree) {
+    return (
+        tree->parent != NULL &&
+
+        rbtIsLeftChild(tree) &&
+        tree->parent->right != NULL &&
+        tree->parent->right->color == BLACK &&
+
+        (tree->parent->right->left != NULL && tree->parent->right->left->color == RED) &&
+        (tree->parent->right->right == NULL || tree->parent->right->right->color == BLACK)
+    );
+}
+
+bool rbtRemoveFixupFifthMirrorImageCaseCheck(rbt *tree) {
+    return (
+        tree->parent != NULL &&
+
+        rbtIsRightChild(tree) &&
+        tree->parent->left != NULL &&
+        tree->parent->left->color == BLACK &&
+
+        (tree->parent->left->left == NULL || tree->parent->left->left->color == BLACK) &&
+        (tree->parent->left->right != NULL && tree->parent->left->right->color == RED)
+    );
+}
+
 void rbtRemoveFixup(rbt **tree, rbt **root) {
     if (*tree == NULL) {
         return;
@@ -359,6 +385,18 @@ void rbtRemoveFixup(rbt **tree, rbt **root) {
         } else {
             node->color = BLACK;
         }
+    } else if (rbtRemoveFixupFifthCaseCheck(node)) {
+        rbtRotateRight(&node->parent->right, root);
+        node->parent->right->color = BLACK;
+        node->parent->right->right->color = RED; 
+
+        rbtRemoveFixup(tree, root);
+    } else if (rbtRemoveFixupFifthMirrorImageCaseCheck(node)) {
+        rbtRotateLeft(&node->parent->left, root);
+        node->parent->left->color = BLACK;
+        node->parent->left->left->color = RED;
+
+        rbtRemoveFixup(tree, root);
     } else {
         fprintf(stderr, "Caso não implementado para o rbtRemoveFixup()\n");
         exit(1);
