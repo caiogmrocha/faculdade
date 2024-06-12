@@ -242,6 +242,38 @@ bool rbtRemoveFixupSecondMirrorImageCaseCheck(rbt *tree) {
     );
 }
 
+bool rbtRemoveFixupThirdCaseCheck(rbt *tree) {
+    bool parentIsBlack = tree->parent != NULL && tree->parent->color == BLACK;
+
+    return (
+        tree->parent != NULL &&
+        tree->parent->color == BLACK &&
+
+        rbtIsLeftChild(tree) &&
+        tree->parent->right != NULL &&
+        tree->parent->right->color == BLACK &&
+
+        (tree->parent->right->left == NULL || tree->parent->right->left->color == BLACK) &&
+        (tree->parent->right->right == NULL || tree->parent->right->right->color == BLACK)
+    );
+}
+
+bool rbtRemoveFixupThirdMirrorImageCaseCheck(rbt *tree) {
+    bool parentIsBlack = tree->parent != NULL && tree->parent->color == BLACK;
+
+    return (
+        tree->parent != NULL &&
+        tree->parent->color == BLACK &&
+
+        rbtIsRightChild(tree) &&
+        tree->parent->left != NULL &&
+        tree->parent->left->color == BLACK &&
+
+        (tree->parent->left->left == NULL || tree->parent->left->left->color == BLACK) &&
+        (tree->parent->left->right == NULL || tree->parent->left->right->color == BLACK)
+    );
+}
+
 void rbtRemoveFixup(rbt **tree, rbt **root) {
     if (*tree == NULL) {
         return;
@@ -267,6 +299,28 @@ void rbtRemoveFixup(rbt **tree, rbt **root) {
         node->parent->parent->color = BLACK;
 
         rbtRemoveFixup(tree, root);
+    } else if (rbtRemoveFixupThirdCaseCheck(node)) {
+        node->parent->color = DOUBLE_BLACK;
+        node->parent->right->color = RED;
+
+        if (node == DB_NULL) {
+            node = NULL;
+        } else {
+            node->color = BLACK;
+        }
+
+        rbtRemoveFixup(&node->parent, root);
+    } else if (rbtRemoveFixupThirdMirrorImageCaseCheck(node)) {
+        node->parent->color = DOUBLE_BLACK;
+        node->parent->left->color = RED;
+        
+        if (node == DB_NULL) {
+            node = NULL;
+        } else {
+            node->color = BLACK;
+        }
+
+        rbtRemoveFixup(&node->parent, root);
     } else {
         fprintf(stderr, "Caso não implementado para o rbtRemoveFixup()\n");
         exit(1);
