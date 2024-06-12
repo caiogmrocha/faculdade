@@ -210,10 +210,44 @@ rbt* rbtGetRightMostNode(rbt **tree) {
     return iterator;
 }
 
-void rbtRemoveFixup(rbt **tree) {
+bool rbtRemoveFixupSecondCaseCheck(rbt *tree) {
+    bool parentIsBlack = tree->parent != NULL && tree->parent->color == BLACK;
+
+    return (
+        tree->parent != NULL &&
+        tree->parent->color == BLACK &&
+
+        rbtIsLeftChild(tree) &&
+        tree->parent->right != NULL &&
+        tree->parent->right->color == RED &&
+
+        (tree->parent->right->left == NULL || tree->parent->right->left->color == BLACK) &&
+        (tree->parent->right->right == NULL || tree->parent->right->right->color == BLACK)
+    );
+}
+
+bool rbtRemoveFixupSecondMirrorImageCaseCheck(rbt *tree) {
+    bool parentIsBlack = tree->parent != NULL && tree->parent->color == BLACK;
+
+    return (
+        tree->parent != NULL &&
+        tree->parent->color == BLACK &&
+
+        rbtIsRightChild(tree) &&
+        tree->parent->left != NULL &&
+        tree->parent->left->color == RED &&
+
+        (tree->parent->left->left == NULL || tree->parent->left->left->color == BLACK) &&
+        (tree->parent->left->right == NULL || tree->parent->left->right->color == BLACK)
+    );
+}
+
+void rbtRemoveFixup(rbt **tree, rbt **root) {
     if (*tree == NULL) {
         return;
     }
+
+    rbt *node = *tree;
 
     if ((*tree)->parent == NULL) { // case 1
         if (*tree == DB_NULL) {
@@ -221,10 +255,25 @@ void rbtRemoveFixup(rbt **tree) {
         } else {
             (*tree)->color = BLACK;
         }
+    } else if (rbtRemoveFixupSecondCaseCheck(node)) {
+        rbtRotateLeft(&node->parent, root);
+        node->parent->color = RED;
+        node->parent->parent->color = BLACK;
+
+        rbtRemoveFixup(tree, root);
+    } else if (rbtRemoveFixupSecondMirrorImageCaseCheck(node)) {
+        rbtRotateRight(&node->parent, root);
+        node->parent->color = RED;
+        node->parent->parent->color = BLACK;
+
+        rbtRemoveFixup(tree, root);
+    } else {
+        fprintf(stderr, "Caso não implementado para o rbtRemoveFixup()\n");
+        exit(1);
     }
 }
 
-void rbtRemove(rbt **tree, int value, rbt **root) {
+void rbtRemoveDef(rbt **tree, int value, rbt **root) {
     if (*tree == NULL) {
         return;
     }
@@ -235,7 +284,7 @@ void rbtRemove(rbt **tree, int value, rbt **root) {
 
             (*tree)->value = rightMostNodeFromLeftSubTree->value;
 
-            rbtRemove(&(*tree)->left, rightMostNodeFromLeftSubTree->value, root);
+            rbtRemoveDef(&(*tree)->left, rightMostNodeFromLeftSubTree->value, root);
         } else if ((*tree)->left != NULL && (*tree)->right == NULL) {
             rbt *temp = *tree;
 
@@ -271,15 +320,19 @@ void rbtRemove(rbt **tree, int value, rbt **root) {
 
             *tree = DB_NULL;
 
-            rbtRemoveFixup(tree);
+            rbtRemoveFixup(tree, root);
 
             free(temp);
         }
     } else if (value < (*tree)->value) {
-        rbtRemove(&(*tree)->left, value, root);
+        rbtRemoveDef(&(*tree)->left, value, root);
     } else {
-        rbtRemove(&(*tree)->right, value, root);
+        rbtRemoveDef(&(*tree)->right, value, root);
     }
+}
+
+void rbtRemove(rbt **tree, int value) {
+    rbtRemoveDef(tree, value, tree);
 }
 
 void rbtPreOrderTraversal(rbt **tree, void cb(rbt **tree)) {

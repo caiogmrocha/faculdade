@@ -7,15 +7,14 @@ int main () {
 
     rbt *tree = NULL;
 
-    rbtInsert(&tree, 25);
-    // rbtInsert(&tree, 30);
-    // rbtInsert(&tree, 20);
-    // rbtInsert(&tree, 15);
-    // rbtInsert(&tree, 17);
-    // rbtInsert(&tree, 35);
-    // rbtInsert(&tree, 32);
+    rbtInsert(&tree, 30);
+    rbtInsert(&tree, 35);
+    rbtInsert(&tree, 40);
+    rbtInsert(&tree, 38);
+    rbtInsert(&tree, 45);
+    rbtInsert(&tree, 50);
 
-    rbtRemove(&tree, 25, NULL);
+    rbtRemove(&tree, 30);
 
     rbtPostOrderTraversal(&tree, rbtFreeNode);
 
