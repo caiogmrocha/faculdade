@@ -28,8 +28,14 @@ int main() {
     htvInsert(table, 78);
     htvInsert(table, 99);
     htvInsert(table, 42);
+    
+    htvTraversal(table, printTableElement);
+
+    htvRemove(table, 6);
 
     htvTraversal(table, printTableElement);
+
+    htvRemove(table, 24);
 
     return 0;
 }
