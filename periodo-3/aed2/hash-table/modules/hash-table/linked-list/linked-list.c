@@ -34,3 +34,13 @@ void llRemove(ll **list, int value) {
         llRemove(&(*list)->next, value);
     }
 }
+
+int llSearch(ll *list, int value) {
+    if (list == NULL) {
+        return 0;
+    } else if (list->value == value) {
+        return value;
+    } else {
+        return llSearch(list->next, value);
+    }
+}

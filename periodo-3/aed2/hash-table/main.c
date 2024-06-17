@@ -18,6 +18,10 @@ int main() {
     llInsert(&list, 4);
     llInsert(&list, 45);
 
+    llRemove(&list, 1);
+    llRemove(&list, 3);
+    llRemove(&list, 45);
+
     // htv table;
 
     // htvBootstrap(table);
