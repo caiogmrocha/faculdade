@@ -33,7 +33,7 @@ int main() {
     // htllTraversal(table, printTableElement);
 
     // htllSearch(table, 6);
-    // htllRemove(table, 6);
+    htllRemove(table, 6);
     // htllSearch(table, 6);
 
     // htllTraversal(table, printTableElement);

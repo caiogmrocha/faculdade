@@ -16,11 +16,27 @@ int htllHash(int key) {
 void htllInsert(htll table, int value) {
     int idx = htllHash(value);
 
-    while (table[idx] != HTLL_NULL_VALUE) {
+    while (table[idx] != NULL) {
         idx = htllHash(idx + 1);
     }
 
     llInsert(&table[idx], value);
+}
+
+void htllRemove(htll table, int value) {
+    int idx = htllHash(value);
+
+    while (!llSearch(table[idx], value) && table[idx] != NULL) {
+        idx = htllHash(idx + 1);
+    }
+
+    if (llSearch(table[idx], value)) {
+        llRemove(&table[idx], value);
+
+        // printf("Elemento %i encontrado no índice %i\n", table[idx], idx);
+    } else {
+        // printf("Elemento %i não encontrado no índice %i\n", value, idx);
+    }
 }
 
 void htllFree(htll table) {
