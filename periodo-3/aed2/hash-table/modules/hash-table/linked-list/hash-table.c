@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "linked-list.h"
 #include "hash-table.h"
@@ -26,16 +27,38 @@ void htllInsert(htll table, int value) {
 void htllRemove(htll table, int value) {
     int idx = htllHash(value);
 
-    while (!llSearch(table[idx], value) && table[idx] != NULL) {
+    int valueHasBeenFound = llSearch(table[idx], value);
+
+    while (!valueHasBeenFound && table[idx] != NULL) {
         idx = htllHash(idx + 1);
     }
 
-    if (llSearch(table[idx], value)) {
+    if (valueHasBeenFound) {
         llRemove(&table[idx], value);
 
-        // printf("Elemento %i encontrado no índice %i\n", table[idx], idx);
+        // printf("Elemento %i encontrado no índice %i\n", value, idx);
     } else {
         // printf("Elemento %i não encontrado no índice %i\n", value, idx);
+    }
+}
+
+int htllSearch(htll table, int value) {
+    int idx = htllHash(value);
+
+    int valueHasBeenFound = llSearch(table[idx], value);
+
+    while (!valueHasBeenFound && table[idx] != NULL) {
+        idx = htllHash(idx + 1);
+    }
+
+    if (valueHasBeenFound) {
+        printf("Elemento %i encontrado no índice %i\n", value, idx);
+
+        return valueHasBeenFound;
+    } else {
+        printf("Elemento %i não encontrado no índice %i\n", value, idx);
+
+        return HTLL_NULL_VALUE;
     }
 }
 
