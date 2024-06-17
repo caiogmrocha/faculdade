@@ -18,3 +18,19 @@ void llInsert(ll **list, int value) {
 
     (*list)->next = temp;
 }
+
+void llRemove(ll **list, int value) {
+    if (*list == NULL) {
+        return;
+    }
+
+    if ((*list)->value == value) {
+        ll *temp = *list;
+
+        *list = (*list)->next;
+
+        free(temp);
+    } else {
+        llRemove(&(*list)->next, value);
+    }
+}
