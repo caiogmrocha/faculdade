@@ -6,6 +6,7 @@ typedef struct ll {
     struct ll *next;
 } ll;
 
+ll*  llFactory(int value);
 void llInsert(ll **list, int value);
 void llRemove(ll **list, int value);
 int  llSearch(ll *list, int value);
