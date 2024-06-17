@@ -31,7 +31,9 @@ int main() {
     
     htvTraversal(table, printTableElement);
 
+    htvSearch(table, 6);
     htvRemove(table, 6);
+    htvSearch(table, 6);
 
     htvTraversal(table, printTableElement);
 

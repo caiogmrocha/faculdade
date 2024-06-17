@@ -34,7 +34,25 @@ void htvRemove(htv table, int value) {
 
         // printf("Elemento %i encontrado no índice %i\n", table[idx], idx);
     } else {
+        // printf("Elemento %i não encontrado no índice %i\n", value, idx);
+    }
+}
+
+int htvSearch(htv table, int value) {
+    int idx = htvHash(value);
+
+    while (table[idx] != value && table[idx] != HTV_NULL_VALUE) {
+        idx = htvHash(idx + 1);
+    }
+
+    if (table[idx] == value) {
+        printf("Elemento %i encontrado no índice %i\n", table[idx], idx);
+
+        return table[idx];
+    } else {
         printf("Elemento %i não encontrado no índice %i\n", value, idx);
+
+        return HTV_NULL_VALUE;
     }
 }
 
