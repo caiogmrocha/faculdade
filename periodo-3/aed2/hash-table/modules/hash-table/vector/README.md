@@ -7,4 +7,5 @@ A tabela hash desse diretório tem as seguintes características:
     - logo, o tamanho da tabela será 31, pois:
         - 2 * quantidade de elementos => 2 * 15 = 30
         - e o número primo mais próximo de 30 é 31.
+        - o fator de espalhamento, nesse caso, é de ~= 0.48
     
