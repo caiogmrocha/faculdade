@@ -62,18 +62,16 @@ int htllSearch(htll table, int value) {
     }
 }
 
-void htllFree(htll table) {
+void htllTraversal(htll table, void cb(ll *node)) {
     for (int i = 0; i < HTLL_TABLE_LENGTH; i++) {
         ll *iterator = table[i];
 
-        if (iterator != NULL) {
-            while (iterator->next != NULL) {
-                ll *cur = iterator;
+        while (iterator != NULL) {
+            ll *cur = iterator;
+            
+            iterator = iterator->next;
 
-                iterator = iterator->next;
-
-                free(cur);
-            }
+            cb(cur);
         }
     }
 }

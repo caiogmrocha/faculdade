@@ -14,7 +14,6 @@ int  htllHash(int key);
 void htllInsert(htll table, int value);
 void htllRemove(htll table, int value);
 int  htllSearch(htll table, int value);
-void htllTraversal(htll table, void cb(int value));
-void htllFree(htll table);
+void htllTraversal(htll table, void cb(ll *node));
 
 #endif

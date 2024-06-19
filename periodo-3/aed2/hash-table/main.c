@@ -40,7 +40,7 @@ int main() {
 
     // htllRemove(table, 24);
 
-    htllFree(table);
+    htllTraversal(table, (void *) free);
 
     return 0;
 }
