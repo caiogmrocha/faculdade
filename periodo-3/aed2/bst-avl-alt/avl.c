@@ -23,3 +23,27 @@ avl *avlInsert(avl *tree, int value) {
 
     return tree;
 }
+
+avl *avlPreOrderTraversal(avl *tree, void cb(avl *tree)) {
+    if (tree != NULL) {
+        cb(tree);
+        avlPreOrderTraversal(tree->left, cb);
+        avlPreOrderTraversal(tree->right, cb);
+    }
+}
+
+avl *avlInOrderTraversal(avl *tree, void cb(avl *tree)) {
+    if (tree != NULL) {
+        avlInOrderTraversal(tree->left, cb);
+        cb(tree);
+        avlInOrderTraversal(tree->right, cb);
+    }
+}
+
+avl *avlPostOrderTraversal(avl *tree, void cb(avl *tree)) {
+    if (tree != NULL) {
+        avlPostOrderTraversal(tree->left, cb);
+        avlPostOrderTraversal(tree->right, cb);
+        cb(tree);
+    }
+}

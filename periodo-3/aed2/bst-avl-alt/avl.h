@@ -7,5 +7,8 @@ typedef struct avl {
 } avl;
 
 avl *avlInsert(avl *tree, int value);
+avl *avlPreOrderTraversal(avl *tree, void cb(avl *tree));
+avl *avlInOrderTraversal(avl *tree, void cb(avl *tree));
+avl *avlPostOrderTraversal(avl *tree, void cb(avl *tree));
 
 #endif
