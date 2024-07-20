@@ -16,6 +16,8 @@ int main(int argc, char **argv) {
     tree = avlInsert(tree, 17);
     tree = avlInsert(tree, 9);
 
+    tree = avlRemove(tree, 10);
+
     avlPreOrderTraversal(tree, print);
     printf("\n");
 

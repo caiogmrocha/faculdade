@@ -24,6 +24,58 @@ avl *avlInsert(avl *tree, int value) {
     return tree;
 }
 
+avl *greather(avl *tree) {
+    avl *iterator = tree->right;
+
+    while (iterator->right != NULL) {
+        iterator = iterator->right;
+    }
+
+    return iterator;
+}
+
+avl *avlRemove(avl *tree, int value) {
+    if (tree == NULL) {
+        return tree;
+    } else if (value == tree->value) {
+        if (tree->left == NULL && tree->right == NULL) {
+            free(tree);
+
+            return NULL;
+        } else if (tree->left != NULL && tree->right == NULL) {
+            avl *temp = tree;
+
+            tree = tree->left;
+
+            free(temp);
+
+            return tree;
+        } else if (tree->left == NULL && tree->right != NULL) {
+            avl *temp = tree;
+
+            tree = tree->right;
+
+            free(temp);
+
+            return tree;
+        } else {
+            avl *greatherAtLeft = greather(tree->left);
+
+            tree->value = greatherAtLeft->value;
+
+            tree->left = avlRemove(tree->left, greatherAtLeft->value);
+
+            return tree;
+        }
+    } else if (value > tree->value) {
+        tree->right = avlRemove(tree->right, value);
+    } else {
+        tree->left = avlRemove(tree->left, value);
+    }
+
+    return tree;
+}
+
 avl *avlPreOrderTraversal(avl *tree, void cb(avl *tree)) {
     if (tree != NULL) {
         cb(tree);
