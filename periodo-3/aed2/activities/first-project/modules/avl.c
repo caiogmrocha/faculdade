@@ -11,3 +11,14 @@ avl *avlFactory(int value) {
 
     return tree;
 }
+
+
+void avlInsert(avl **tree, int value) {
+    if (*tree == NULL) {
+        *tree = avlFactory(value);
+    } else if (value < (*tree)->value) {
+        avlInsert(&(*tree)->left, value);
+    } else {
+        avlInsert(&(*tree)->right, value);
+    }
+}
