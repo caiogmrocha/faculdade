@@ -172,13 +172,13 @@ void bstBalance(bst **tree) {
 
     int balanceFactor = bstBalanceFactor(tree);
 
-    if (balanceFactor <= -1 && bstBalanceFactor(&(*tree)->right) >= 1) {
+    if (balanceFactor < -1 && bstBalanceFactor(&(*tree)->right) > 1) {
         bstRotateRightLeft(tree);
-    } else if (balanceFactor >= 1 && bstBalanceFactor(&(*tree)->left) <= -1) {
+    } else if (balanceFactor > 1 && bstBalanceFactor(&(*tree)->left) < -1) {
         bstRotateLeftRight(tree);
-    } else if (balanceFactor <= -1) {
+    } else if (balanceFactor < -1) {
         bstRotateLeft(tree);
-    } else if (balanceFactor >= 1) {
+    } else if (balanceFactor > 1) {
         bstRotateRight(tree);
     }
 }

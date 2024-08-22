@@ -12,6 +12,16 @@ avl *avlFactory(int value) {
     return tree;
 }
 
+int avlHeight(avl *tree) {
+    if (tree == NULL) {
+        return 0;
+    } else {
+        int leftHeight = avlHeight(tree->left);
+        int rightHeight = avlHeight(tree->right);
+
+        return 1 + (leftHeight > rightHeight ? leftHeight : rightHeight);
+    }
+}
 
 void avlInsert(avl **tree, int value) {
     if (*tree == NULL) {

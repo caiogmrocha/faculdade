@@ -10,4 +10,7 @@ avl *avlFactory(int value);
 void avlInsert(avl **tree, int value);
 void avlRemove(avl **tree, int value);
 
+int avlBalanceFactor(avl *tree);
+int avlHeight(avl *tree);
+
 #endif
