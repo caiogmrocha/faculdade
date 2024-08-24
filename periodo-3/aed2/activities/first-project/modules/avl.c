@@ -60,8 +60,9 @@ void avlRotateLeftRight(avl **node) {
     avlRotateRight(node);
 }
 
-void avlRotateRightLeft() {
-
+void avlRotateRightLeft(avl **node) {
+    avlRotateRight(&(*node)->right);
+    avlRotateRight(node);
 }
 
 void avlInsert(avl **tree, int value) {
