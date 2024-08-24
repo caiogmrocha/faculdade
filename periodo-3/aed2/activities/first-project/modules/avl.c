@@ -23,6 +23,36 @@ int avlHeight(avl *tree) {
     }
 }
 
+int avlBalanceFactor(avl *tree) {
+    return avlHeight(tree->right) - avlHeight(tree->left);
+}
+
+void avlRotateLeft(avl **node) {
+    if (*node == NULL) {
+        return;
+    }
+
+    avl *p = *node;
+    avl *u = p->right;
+
+    p->right = u->left;
+    u->left = p;
+
+    *node = u;
+}
+
+void avlRotateRight() {
+
+}
+
+void avlRotateLeftRight() {
+
+}
+
+void avlRotateRightLeft() {
+
+}
+
 void avlInsert(avl **tree, int value) {
     if (*tree == NULL) {
         *tree = avlFactory(value);
