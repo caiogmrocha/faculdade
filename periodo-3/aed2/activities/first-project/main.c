@@ -6,14 +6,15 @@ int main() {
     printf("Hello World!\n");
 
     avl *tree = NULL;
-    short cresceu = 0;
+    short grew = 0;
+    short shrank = 0;
 
-    avlInsert(&tree, 30, &cresceu);
-    avlInsert(&tree, 20, &cresceu);
-    avlInsert(&tree, 35, &cresceu);
-    avlInsert(&tree, 33, &cresceu);
-    avlInsert(&tree, 36, &cresceu);
-    avlInsert(&tree, 37, &cresceu);
+    avlInsert(&tree, 30, &grew);
+    avlInsert(&tree, 20, &grew);
+    avlInsert(&tree, 35, &grew);
+    avlInsert(&tree, 33, &grew);
+    avlInsert(&tree, 36, &grew);
+    avlInsert(&tree, 37, &grew);
 
     printf("Value: %i\n", tree->value);
 

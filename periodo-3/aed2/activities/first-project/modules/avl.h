@@ -8,14 +8,15 @@ typedef struct avl {
 
 avl *avlFactory(int value);
 
-void avlRotateLeft(avl **node);
-void avlRotateRight(avl **node);
-void avlRotateLeft(avl **node);
-void avlRotateRight(avl **node);
+void avlInsert(avl **tree, int value, short *grew);
+void avlRemove(avl **tree, int value, short *shrank);
+
 void avlBalance(avl **node);
 
-void avlInsert(avl **tree, int value, short *grew);
-void avlRemove(avl **tree, int value);
+void avlRotateLeft(avl **node);
+void avlRotateRight(avl **node);
+void avlRotateLeft(avl **node);
+void avlRotateRight(avl **node);
 
 int avlBalanceFactor(avl *tree);
 int avlHeight(avl *tree);

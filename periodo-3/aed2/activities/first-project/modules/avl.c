@@ -174,10 +174,13 @@ void avlInsert(avl **tree, int value, short *grew) {
     }
 }
 
-void avlRemove(avl **tree, int value) {
+void avlRemove(avl **tree, int value, short *shrank) {
     if (*tree == NULL) {
+        *shrank = 0;
         return;
     } else if (value == (*tree)->value) {
+        *shrank = 1;
+
         if ((*tree)->left == NULL && (*tree)->right == NULL) {
             free(*tree);
 
@@ -207,11 +210,47 @@ void avlRemove(avl **tree, int value) {
 
             (*tree)->value = leftmost->value;
 
-            avlRemove(&(*tree)->left, leftmost->value);
+            avlRemove(&(*tree)->left, leftmost->value, shrank);
+
+            if (*shrank) {
+                if ((*tree)->bf == -1) {
+                    *shrank = 1;
+                    (*tree)->bf = 0;
+                } else if ((*tree)->bf == 0) {
+                    *shrank = 0;
+                    (*tree)->bf = 1;
+                } else if ((*tree)->bf == 1) {
+                    avlBalance(tree);
+                }
+            }
         }
     } else if (value < (*tree)->value) {
-        avlRemove(&(*tree)->left, value);
+        avlRemove(&(*tree)->left, value, shrank);
+
+        if (*shrank) {
+            if ((*tree)->bf == -1) {
+                *shrank = 1;
+                (*tree)->bf = 0;
+            } else if ((*tree)->bf == 0) {
+                *shrank = 0;
+                (*tree)->bf = 1;
+            } else if ((*tree)->bf == 1) {
+                avlBalance(tree);
+            }
+        }
     } else {
-        avlRemove(&(*tree)->right, value);
+        avlRemove(&(*tree)->right, value, shrank);
+
+        if (*shrank) {
+            if ((*tree)->bf == -1) {
+                avlBalance(tree);
+            } else if ((*tree)->bf == 0) {
+                *shrank = 0;
+                (*tree)->bf = -1;
+            } else if ((*tree)->bf == 1) {
+                *shrank = 1;
+                (*tree)->bf = 0;
+            }
+        }
     }
 }
