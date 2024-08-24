@@ -73,7 +73,7 @@ void avlBalance(avl **node) {
         avl *u = p->right;        
 
         if (u->bf >= 0) {
-            if (u->bf == 0) {
+            if (u->bf == 1) {
                 p->bf = 0;
                 u->bf = 0;
             } else {
@@ -136,27 +136,12 @@ void avlBalance(avl **node) {
     }
 }
 
-void avlInsert(avl **tree, int value, int *grew) {
+void avlInsert(avl **tree, int value, short *grew) {
     if (*tree == NULL) {
         *tree = avlFactory(value);
 
         *grew = 1;
     } else if (value < (*tree)->value) {
-        avlInsert(&(*tree)->left, value, grew);
-
-        if (*grew) {
-            if ((*tree)->bf == -1) {
-                (*tree)->bf = 0;
-                *grew = 0;
-            } else if ((*tree)->bf == 0) {
-                (*tree)->bf =  1;
-                *grew = 1; // indica que a subárvore atual subiu para o a próxima chamada a ser desempilhada
-            } else if ((*tree)->bf == 1) {
-                *grew = 0;
-                avlBalance(tree);
-            }
-        }
-    } else {
         avlInsert(&(*tree)->left, value, grew);
 
         if (*grew) {
@@ -169,6 +154,21 @@ void avlInsert(avl **tree, int value, int *grew) {
             } else if ((*tree)->bf == 1) {
                 (*tree)->bf = 0;
                 *grew = 0;
+            }
+        }
+    } else {
+        avlInsert(&(*tree)->right, value, grew);
+
+        if (*grew) {
+            if ((*tree)->bf == -1) {
+                (*tree)->bf = 0;
+                *grew = 0;
+            } else if ((*tree)->bf == 0) {
+                (*tree)->bf = 1;
+                *grew = 1; // indica que a subárvore atual subiu para o a próxima chamada a ser desempilhada
+            } else if ((*tree)->bf == 1) {
+                *grew = 0;
+                avlBalance(tree);
             }
         }
     }
