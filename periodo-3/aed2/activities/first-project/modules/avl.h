@@ -9,6 +9,7 @@ typedef struct avl {
 avl *avlFactory(int value);
 
 void avlRotateLeft(avl **node);
+void avlRotateRight(avl **node);
 
 void avlInsert(avl **tree, int value);
 void avlRemove(avl **tree, int value);
