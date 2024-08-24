@@ -7,16 +7,12 @@ int main() {
 
     avl *tree = NULL;
 
-    avlInsert(&tree, 30);
-    avlInsert(&tree, 20);
-    avlInsert(&tree, 35);
-    avlInsert(&tree, 33);
-    avlInsert(&tree, 36);
-
-    avlRotateLeft(&tree);
-
-    // avlRemove(&tree, 30);
-    avlRemove(&tree, 30);
+    avlInsert(&tree, 30, 0);
+    avlInsert(&tree, 20, 0);
+    avlInsert(&tree, 35, 0);
+    avlInsert(&tree, 33, 0);
+    avlInsert(&tree, 36, 0);
+    avlInsert(&tree, 37, 0);
 
     printf("Value: %i\n", tree->value);
 
