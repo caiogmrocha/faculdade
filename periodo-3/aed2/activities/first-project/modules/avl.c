@@ -55,8 +55,9 @@ void avlRotateRight(avl **node) {
     *node = u;
 }
 
-void avlRotateLeftRight() {
-
+void avlRotateLeftRight(avl **node) {
+    avlRotateLeft(&(*node)->left);
+    avlRotateRight(node);
 }
 
 void avlRotateRightLeft() {
