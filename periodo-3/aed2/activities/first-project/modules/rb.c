@@ -14,3 +14,12 @@ rb *rbFactory(int value, rb *parent) {
     return tree;
 }
 
+void rbInsert(rb **tree, int value, rb *parent) {
+    if (*tree == NULL) {
+        *tree = rbFactory(value, parent);
+    } else if (value < (*tree)->value) {
+        rbInsert(&(*tree)->left, value, *tree);
+    } else {
+        rbInsert(&(*tree)->right, value, *tree);
+    }
+}
