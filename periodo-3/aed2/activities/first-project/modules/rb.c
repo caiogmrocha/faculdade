@@ -14,9 +14,65 @@ rb *rbFactory(int value, rb *parent) {
     return tree;
 }
 
+int rbIsLeftChild(rb *node) {
+    return node->parent->left == node;
+}
+
+int rbIsRoot(rb *node) {
+    return node->parent == NULL;
+}
+
+rb *rbGetUncle(rb *node) {
+    if (node != NULL && node->parent != NULL && node->parent->parent != NULL) {
+        if (rbIsLeftChild(node->parent)) {
+            return node->parent->parent->right;
+        } else {
+            return node->parent->parent->left;
+        }
+    }
+
+    return NULL;
+}
+
+void rbInsertFixupRepaint(rb *tree) {
+    if (rbIsRoot(tree)) {
+        tree->color = BLACK;
+
+        return;
+    }
+
+    if (tree->parent != NULL && tree->parent->parent != NULL) {
+        tree->parent->parent->color = RED;
+    }
+    
+    tree->parent->color = BLACK;
+
+    rb *uncle = rbGetUncle(tree);
+    
+    if (uncle != NULL) {
+        uncle->color = BLACK;
+    }
+    
+    rbInsertFixupRepaint(tree->parent->parent);
+}
+
+void rbInsertFixup(rb **node) {
+    rb *uncle = rbGetUncle(*node);
+
+    if (uncle == NULL || uncle->color == BLACK) {
+        
+    } else {
+        rbInsertFixupRepaint((*node)->parent->parent);
+    }
+}
+
 void rbInsert(rb **tree, int value, rb *parent) {
     if (*tree == NULL) {
         *tree = rbFactory(value, parent);
+
+        if ((*tree)->parent != NULL && (*tree)->parent->color == RED) {
+
+        }
     } else if (value < (*tree)->value) {
         rbInsert(&(*tree)->left, value, *tree);
     } else {

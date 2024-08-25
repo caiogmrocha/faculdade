@@ -14,7 +14,8 @@ rb *rbFactory(int value, rb *parent);
 void rbInsert(rb **tree, int value, rb *parent);
 void rbRemove(rb **tree, int value);
 
-void rbFixup(rb **node);
+void rbInsertFixup(rb **node);
+void rbRemoveFixup(rb **node);
 
 void rbRotateLeft(rb **node);
 void rbRotateRight(rb **node);
