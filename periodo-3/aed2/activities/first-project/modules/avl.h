@@ -11,7 +11,7 @@ avl *avlFactory(int value);
 void avlInsert(avl **tree, int value, short *grew);
 void avlRemove(avl **tree, int value, short *shrank);
 
-void avlBalance(avl **node);
+void avlFixup(avl **node);
 
 void avlRotateLeft(avl **node);
 void avlRotateRight(avl **node);

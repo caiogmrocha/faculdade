@@ -66,7 +66,7 @@ void avlRotateRightLeft(avl **node) {
     avlRotateRight(node);
 }
 
-void avlBalance(avl **node) {
+void avlFixup(avl **node) {
     avl *p = *node;
     
     if (p->bf > 0) {
@@ -147,7 +147,7 @@ void avlInsert(avl **tree, int value, short *grew) {
         if (*grew) {
             if ((*tree)->bf == -1) {
                 *grew = 0;
-                avlBalance(tree);
+                avlFixup(tree);
             } else if ((*tree)->bf == 0) {
                 (*tree)->bf =  -1;
                 *grew = 1; // indica que a subárvore atual subiu para o a próxima chamada a ser desempilhada
@@ -168,7 +168,7 @@ void avlInsert(avl **tree, int value, short *grew) {
                 *grew = 1; // indica que a subárvore atual subiu para o a próxima chamada a ser desempilhada
             } else if ((*tree)->bf == 1) {
                 *grew = 0;
-                avlBalance(tree);
+                avlFixup(tree);
             }
         }
     }
@@ -220,7 +220,7 @@ void avlRemove(avl **tree, int value, short *shrank) {
                     *shrank = 0;
                     (*tree)->bf = 1;
                 } else if ((*tree)->bf == 1) {
-                    avlBalance(tree);
+                    avlFixup(tree);
                 }
             }
         }
@@ -235,7 +235,7 @@ void avlRemove(avl **tree, int value, short *shrank) {
                 *shrank = 0;
                 (*tree)->bf = 1;
             } else if ((*tree)->bf == 1) {
-                avlBalance(tree);
+                avlFixup(tree);
             }
         }
     } else {
@@ -243,7 +243,7 @@ void avlRemove(avl **tree, int value, short *shrank) {
 
         if (*shrank) {
             if ((*tree)->bf == -1) {
-                avlBalance(tree);
+                avlFixup(tree);
             } else if ((*tree)->bf == 0) {
                 *shrank = 0;
                 (*tree)->bf = -1;

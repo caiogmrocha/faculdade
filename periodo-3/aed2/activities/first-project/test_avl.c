@@ -14,7 +14,10 @@ int main() {
     avlInsert(&tree, 35, &grew);
     avlInsert(&tree, 33, &grew);
     avlInsert(&tree, 36, &grew);
+    avlInsert(&tree, 15, &grew);
     avlInsert(&tree, 37, &grew);
+
+    avlRemove(&tree, 30, &shrank);
 
     printf("Value: %i\n", tree->value);
 
