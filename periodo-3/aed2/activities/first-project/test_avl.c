@@ -2,7 +2,7 @@
 
 #include "modules/avl.h"
 
-int main() {
+int main1() {
     printf("Hello World!\n");
 
     avl *tree = NULL;
