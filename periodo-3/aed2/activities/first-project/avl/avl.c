@@ -254,3 +254,19 @@ void avlRemove(avl **tree, int value, short *shrank) {
         }
     }
 }
+
+void avlPreOrderTraversal(avl *tree, void (*cb)(avl *node)) {
+    if (tree != NULL) {
+        cb(tree);
+        avlPreOrderTraversal(tree->left, cb);
+        avlPreOrderTraversal(tree->right, cb);
+    }
+}
+
+void avlPostOrderTraversal(avl *tree, void (*cb)(avl *node)) {
+    if (tree != NULL) {
+        avlPostOrderTraversal(tree->left, cb);
+        avlPostOrderTraversal(tree->right, cb);
+        cb(tree);
+    }
+}

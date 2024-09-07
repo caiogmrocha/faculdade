@@ -1,0 +1,1 @@
+gcc *.c && ./a.out < input.txt # | diff - output.txt
