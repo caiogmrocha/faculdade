@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -61,7 +60,7 @@ public class App {
 
             Graph graph = graphNodes.get(0);
 
-            Graph foundedVertex = graph.BFS("B", null, null);
+            Graph foundedVertex = graph.DFS("C", null, null);
 
             System.out.println(String.format("Vertex A: %s", (foundedVertex != null ? foundedVertex.getId() : "NOT FOUND")));
         } catch (Exception e) {

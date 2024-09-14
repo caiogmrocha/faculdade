@@ -1,6 +1,8 @@
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Stack;
+import java.util.Queue;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.HashMap;
 
@@ -73,6 +75,42 @@ public class Graph {
       }
    }
 
+   public Graph DFS(String id, Queue<Graph> pathQueue, Map<String, Boolean> visitedVerticesMap) {
+      if (this.id.equals(id)) {
+         return this;
+      } else {
+         if (visitedVerticesMap == null) {
+            visitedVerticesMap = new HashMap<String, Boolean>();
+         }
+
+         visitedVerticesMap.put(this.id, true);
+
+         if (pathQueue == null) {
+            pathQueue = new LinkedList<Graph>();
+         }
+
+         for (int i = this.adjacences.size() - 1; i >= 0; i--) {
+            Graph adjacentVertex = this.adjacences.get(i);
+
+            Boolean vertexIsAlreadyVisited = visitedVerticesMap.get(adjacentVertex.getId());
+
+            if (vertexIsAlreadyVisited == null || !vertexIsAlreadyVisited) {
+               pathQueue.add(adjacentVertex);
+            }
+         }
+
+         Graph vertex = null;
+
+         while (pathQueue.size() > 0 && vertex == null) {
+            Graph child = pathQueue.poll();
+
+            vertex = child.DFS(id, pathQueue, visitedVerticesMap);
+         }
+
+         return vertex;
+      }
+   }
+   
    @Override
    public int hashCode() {
       final int prime = 31;
