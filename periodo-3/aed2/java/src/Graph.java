@@ -1,5 +1,8 @@
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Stack;
+import java.util.Map;
+import java.util.HashMap;
 
 public class Graph {
    private String id;
@@ -32,6 +35,42 @@ public class Graph {
 
    public Boolean hasAdjacence(Graph adjacence) {
       return this.adjacences.contains(adjacence);
+   }
+
+   public Graph BFS(String id, Stack<Graph> pathStack, Map<String, Boolean> visitedVerticesMap) {
+      if (this.id.equals(id)) {
+         return this;
+      } else {
+         if (visitedVerticesMap == null) {
+            visitedVerticesMap = new HashMap<String, Boolean>();
+         }
+
+         visitedVerticesMap.put(this.id, true);
+         
+         if (pathStack == null) {
+            pathStack = new Stack<Graph>();
+         }
+
+         for (int i = this.adjacences.size() - 1; i >= 0; i--) {
+            Graph adjacentVertex = this.adjacences.get(i);
+
+            Boolean vertexIsAlreadyVisited = visitedVerticesMap.get(adjacentVertex.getId());
+            
+            if (vertexIsAlreadyVisited == null || !vertexIsAlreadyVisited) {
+               pathStack.push(adjacentVertex);
+            }
+         }
+
+         Graph vertex = null;
+
+         while (pathStack.size() > 0 && vertex == null) {
+            Graph child = pathStack.pop();
+
+            vertex = child.BFS(id, pathStack, visitedVerticesMap);
+         }
+
+         return vertex;
+      }
    }
 
    @Override
